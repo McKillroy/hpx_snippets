@@ -18,5 +18,9 @@ Welcome to HPX Examples's documentation!
    migration_serialization
    thread_local_objects
    persistent_id_types
+   r_class_to_component
+   r_creating_and_referencing_components
+   r_free_function_to_plain_action
+   r_unordered_map_with_id_type_keys
 
 
