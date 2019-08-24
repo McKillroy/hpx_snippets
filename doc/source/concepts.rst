@@ -1,6 +1,6 @@
 
-Concepts needed to fully understand and leverage HPX
-=====================================================
+Helpful concepts to fully understand and leverage HPX
+========================================================
 
 
 General Programming Concepts
@@ -8,7 +8,7 @@ General Programming Concepts
 * `Typesafety <https://en.wikipedia.org/wiki/Type_safety>`_
 * `Serialization <https://en.wikipedia.org/wiki/Serialization>`_
 * `RPC <https://en.wikipedia.org/wiki/Remote_procedure_call>`_ 
-
+* Operating System Threads and Userspace Threads (a.k.a. "Green Threads", "Fibers", "Tasks", "Coroutines", etc.)
 
 C++ Concepts   
 ---------------
@@ -19,7 +19,9 @@ C++ Concepts
 
 HPX Concepts
 ------------
-* Component, "Server" and "Client" Components
-* Migration, Parcel
+* HPX Components, "Server" and "Client" Components
+* HPX Serialization Implementation
+* HPX Migration, Parcel
+* HPX Macros
 * AGAS
 

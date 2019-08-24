@@ -1,4 +1,4 @@
-Requirements for a system of persistent id_types for HPX components (Draft)
+(Draft) Requirements for a system of persistent id_types for HPX components
 ===============================================================================
 
 1. id_types need to be (optionally) persistent over store/load cycles. Otherwise, References to stored objects may become invalid. This is also required for complete application shutdowns and restarts with different locality configurations (see point 6).
