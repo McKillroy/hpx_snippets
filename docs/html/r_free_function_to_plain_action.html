@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Exporting a free function which also lives in a namespace, from a shared library (.dll or .so), and use it as plain Action &mdash; HPX Cookbook 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HPX Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 1 : Introduction to the Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Helpful concepts to fully understand and leverage HPX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Chapter 3: A collection of HPX Recipes, HowTos and Drafts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo_list.html">CHapter 4: Current ToDo List</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HPX Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Exporting a free function which also lives in a namespace, from a shared library (.dll or .so), and use it as plain  Action</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/r_free_function_to_plain_action.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="exporting-a-free-function-which-also-lives-in-a-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action">
+<h1>Exporting a free function which also lives in a namespace, from a shared library (.dll or .so), and use it as plain  Action<a class="headerlink" href="#exporting-a-free-function-which-also-lives-in-a-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action" title="Permalink to this headline">¶</a></h1>
+<p><strong>Step 1:</strong> Function Declaration in the shared library header:</p>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">app</span> <span class="p">{</span>
+    <span class="n">HPX_COMPONENT_EXPORT</span> <span class="kt">void</span> <span class="n">myFreeFunction</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">HPX_DEFINE_PLAIN_ACTION</span> <span class="p">(</span> <span class="n">app</span><span class="o">::</span><span class="n">myFreeFunction</span><span class="p">,</span> <span class="n">myFreeFunction_Action</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">Note:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">HPX_COMPONENT_EXPORT</span></code> is necessary, or the function will not be exported and you’ll get a missing symbol error at link time.</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">HPX_DEFINE_PLAIN_ACTION</span></code> can be inside the namespace or in the global namespace. The function is referenced by its fully qualified name out of the perspective of the macro placement, the action identifier must be a C++ conformant identifier for serialization purposes. (Best stick with numbers, letters, underscores …). If you decide to put the Macro inside the namespace, you must reference the action in step 2 and 3 with the namespace in front of it like <code class="docutils literal notranslate"><span class="pre">app::myFreeFunction_Action</span></code>.</div>
+</div>
+</div>
+<p><strong>Step 2:</strong> Function implementation in the shared library source:</p>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">HPX_REGISTER_ACTION</span> <span class="p">(</span>  <span class="n">myFreeFunction_Action</span> <span class="p">);</span>
+<span class="k">namespace</span> <span class="n">app</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="n">myFreeFunction</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// .. doing my thing here, &quot;HelloWorld&quot;, etc. ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line">Note:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">HPX_REGISTER_ACTION</span></code> <strong>MUST</strong> be in the global namespace. It is sufficient to just reference the action name you have chosen in the header here.</div>
+<div class="line"><br /></div>
+<div class="line">It is NOT necessary to specify the <code class="docutils literal notranslate"><span class="pre">HPX_COMPONENT_EXPORT</span></code> Macro again.</div>
+</div>
+</div>
+<p><strong>Step 3:</strong> Action invocation in the executable or whoever uses this library:</p>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// of course, you need to be inside your hpx_main scope somehow.</span>
+<span class="c1">// This example &quot;fires and forgets&quot; the action on the local console locality.</span>
+<span class="c1">// Both lines are equivalent:</span>
+<span class="n">hpx</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span> <span class="n">myFreeFunction_Action</span><span class="p">(),</span> <span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span><span class="p">()</span> <span class="p">);</span>
+<span class="n">hpx</span><span class="o">::</span><span class="n">apply</span> <span class="o">&lt;</span><span class="n">myFreeFunction_Action</span><span class="o">&gt;</span> <span class="p">(</span> <span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span><span class="p">()</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yorlik
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

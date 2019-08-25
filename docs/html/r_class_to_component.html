@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Turning a struct or class into a component and use it’s methods &mdash; HPX Cookbook 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HPX Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 1 : Introduction to the Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Helpful concepts to fully understand and leverage HPX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Chapter 3: A collection of HPX Recipes, HowTos and Drafts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo_list.html">CHapter 4: Current ToDo List</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HPX Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Turning a struct or class into a component and use it’s methods</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/r_class_to_component.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="turning-a-struct-or-class-into-a-component-and-use-it-s-methods">
+<h1>Turning a struct or class into a component and use it’s methods<a class="headerlink" href="#turning-a-struct-or-class-into-a-component-and-use-it-s-methods" title="Permalink to this headline">¶</a></h1>
+<dl class="simple">
+<dt>There are two fundamental ways to do this:</dt><dd><ul class="simple">
+<li><p>Do it the basic way</p></li>
+<li><p>Wrap the client side of things into a wrapper object to have typesafety and ease of mind</p></li>
+</ul>
+</dd>
+</dl>
+<p>In this tutorial I’m doing it the dumb way without a client object, because that needs to be done anyways and such is always the first thing to do.</p>
+<p><strong>Step 1:</strong> Define your object and component actions in the header file</p>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">////////////////////////////</span>
+<span class="c1">// Component Library Header</span>
+<span class="c1">// myObj.hpp</span>
+<span class="cm">/* Boilerplate: Includes, etc ... */</span>
+<span class="k">namespace</span> <span class="n">app</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="n">HPX_EXPORT_COMPONENT</span> <span class="nl">myObj</span> <span class="p">:</span> <span class="n">PUBLIC</span> <span class="n">hpx</span><span class="o">::</span><span class="n">components</span><span class="o">::</span><span class="n">component_base</span><span class="o">&lt;</span><span class="n">myObj</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">sayHello</span><span class="p">();</span>
+    <span class="c1">// Variant 1: Let the macro chose a default name for the action (&quot;sayHello_action&quot; in this case)</span>
+    <span class="n">HPX_DEFINE_COMPONENT_ACTION</span><span class="p">(</span><span class="n">myObj</span><span class="p">,</span> <span class="n">sayHello</span><span class="p">);</span>
+    <span class="n">string</span> <span class="nf">sayGoodBye</span><span class="p">(</span><span class="n">string</span> <span class="n">sender</span><span class="p">);</span>
+    <span class="c1">// Variant 2: Chose a custom name for the action (&quot;sayGoodBye_a&quot; in this case)</span>
+    <span class="n">HPX_DEFINE_COMPONENT_ACTION</span><span class="p">(</span><span class="n">myObj</span><span class="p">,</span> <span class="n">sayGoodBye</span><span class="p">,</span> <span class="n">sayGoodBye_a</span><span class="p">);</span> <span class="c1">// chosing a custom action name</span>
+    <span class="c1">// We are not exposing this method as an action;</span>
+    <span class="kt">void</span> <span class="nf">setName</span><span class="p">(</span><span class="n">string</span> <span class="n">name</span><span class="p">);</span>
+    <span class="k">private</span><span class="o">:</span>
+    <span class="n">string</span> <span class="n">name_</span> <span class="o">=</span> <span class="s">&quot;Nobody&quot;</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="c1">// Variant A: Inside the namespace:</span>
+  <span class="c1">// In this case the action will be known globally as app::myobj_component_sayHello_action</span>
+  <span class="n">HPX_REGISTER_ACTION_DECLARATION</span> <span class="p">(</span> <span class="n">myObj</span><span class="o">::</span><span class="n">sayHello_action</span><span class="p">,</span> <span class="n">myobj_component_sayHello_action</span> <span class="p">);</span>
+<span class="p">};</span>
+<span class="c1">// Variant B: Outside the namespace</span>
+<span class="n">HPX_REGISTER_ACTION_DECLARATION</span> <span class="p">(</span> <span class="n">app</span><span class="o">::</span><span class="n">myObj</span><span class="o">::</span><span class="n">sayGoodBye_a</span><span class="p">,</span> <span class="n">myobj_component_sayGoodBye_a</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Step 2:</strong> Implement your methods in the source and add additional Macros to announce the component and the actions to HPX</p>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">////////////////////////////</span>
+<span class="c1">// Component Library</span>
+<span class="c1">// myObj.cpp</span>
+<span class="cm">/* Boilerplate: Includes, etc ... */</span>
+
+<span class="n">string</span> <span class="nl">app</span><span class="p">:</span><span class="n">myObj</span><span class="o">::</span><span class="n">sayHello</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="s">&quot;Hello ! I am &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">name_</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">string</span> <span class="nl">app</span><span class="p">:</span><span class="n">myObj</span><span class="o">::</span><span class="n">sayGoodBye</span><span class="p">(</span><span class="n">string</span> <span class="n">sender</span><span class="p">){</span>
+    <span class="k">return</span> <span class="s">&quot;Bye &quot;</span> <span class="o">+</span> <span class="n">sender</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">setName</span><span class="p">(</span><span class="n">string</span> <span class="n">name</span><span class="p">){</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">name_</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Announce everything to HPX:</span>
+<span class="c1">// 1. Needed for all components</span>
+<span class="n">HPX_REGISTER_COMPONENT_MODULE</span> <span class="p">(</span> <span class="p">);</span>
+
+<span class="c1">// 2. myObj component</span>
+<span class="k">using</span> <span class="n">myObj_component</span>      <span class="o">=</span> <span class="n">app</span><span class="o">::</span><span class="n">myObj</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">myObj_component_type</span> <span class="o">=</span> <span class="n">hpx</span><span class="o">::</span><span class="n">components</span><span class="o">::</span><span class="n">component</span><span class="o">&lt;</span><span class="n">app</span><span class="o">::</span><span class="n">myObj</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="n">HPX_REGISTER_COMPONENT</span> <span class="p">(</span> <span class="n">myObj_component_type</span><span class="p">,</span> <span class="n">myObj_component</span> <span class="p">);</span>
+
+<span class="c1">// 3. myObj component actions</span>
+<span class="c1">// These must match HPX_REGISTER_ACTION_DECLARATION in the header</span>
+<span class="n">HPX_REGISTER_ACTION</span> <span class="p">(</span> <span class="n">app</span><span class="o">::</span><span class="n">myObj</span><span class="o">::</span><span class="n">sayHello_action</span><span class="p">,</span> <span class="n">app</span><span class="o">::</span><span class="n">myobj_component_sayHello_action</span> <span class="p">);</span>
+<span class="n">HPX_REGISTER_ACTION</span> <span class="p">(</span> <span class="n">app</span><span class="o">::</span><span class="n">myObj</span><span class="o">::</span><span class="n">sayGoodBye_a</span><span class="p">,</span>         <span class="n">myobj_component_sayGoodBye_a</span>    <span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Step 3:</strong> Use your component and actions in your HPX Application</p>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="c1">////////////////////////////</span>
+ <span class="c1">// Application Header</span>
+ <span class="c1">// File: MyApp.hpp</span>
+ <span class="cm">/* Boilerplate: Includes, etc ... */</span>
+
+ <span class="cp">#include</span> <span class="cpf">&quot;myObj.hpp&quot;</span><span class="cp"></span>
+
+<span class="cm">/* other code ... */</span>
+<span class="c1">// This is really a very limited example ...</span>
+<span class="c1">// get our local locality id</span>
+<span class="n">hpx</span><span class="o">::</span><span class="n">id_type</span> <span class="n">here</span> <span class="o">=</span> <span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span> <span class="p">(</span> <span class="p">);</span>
+<span class="c1">// async + remote class instantiation (in this example: remote==local)</span>
+<span class="n">hpx</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">hpx</span><span class="o">::</span><span class="n">id_type</span><span class="o">&gt;</span> <span class="n">fut</span> <span class="o">=</span> <span class="n">hpx</span><span class="o">::</span><span class="n">new_</span><span class="o">&lt;</span><span class="n">app</span><span class="o">::</span><span class="n">myObj</span><span class="o">&gt;</span> <span class="p">(</span> <span class="n">here</span> <span class="p">);</span>
+<span class="c1">// get new app::myObj instance id and wait for it if necessary</span>
+<span class="n">hpx</span><span class="o">::</span><span class="n">id_type</span> <span class="n">mObjId</span> <span class="o">=</span> <span class="n">fut</span><span class="p">.</span><span class="n">get</span> <span class="p">(</span> <span class="p">);</span>
+<span class="c1">// start the sayHello Action on our object</span>
+<span class="k">auto</span> <span class="n">rFut</span> <span class="o">=</span> <span class="n">hpx</span><span class="o">::</span><span class="n">async</span><span class="o">&lt;</span><span class="n">app</span><span class="o">::</span><span class="n">myObj</span><span class="o">::</span><span class="n">sayHello_action</span><span class="o">&gt;</span> <span class="p">(</span> <span class="n">mObjId</span> <span class="p">);</span>
+<span class="c1">// wait for hello to finish and return a result</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello from new object: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">rFut</span><span class="p">.</span><span class="n">get</span> <span class="p">(</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+<span class="cm">/* other code ... */</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yorlik
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

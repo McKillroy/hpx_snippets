@@ -7,9 +7,10 @@ Welcome to the HPX Cookbook!
 =============================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
 
+   about
    intro
    scalability
    hpx_basics

@@ -1,6 +1,6 @@
 
-Helpful concepts to fully understand and leverage HPX
-========================================================
+Section 4: Helpful concepts to fully understand and leverage HPX
+=====================================================================
 
 
 General Programming Concepts
