@@ -9,10 +9,16 @@ Open Questions
 
 * What exactly do the Macros do? what is the underlying mechanic of:
 
+    * HPX_DECLARE_PLAIN_ACTION
     * HPX_DEFINE_PLAIN_ACTION
+    * HPX_PLAIN_ACTION
+    * HPX_PLAIN_ACTION_ID
     * HPX_REGISTER_COMPONENT_MODULE
     * HPX_REGISTER_COMPONENT
     * HPX_REGISTER_ACTION
 
-
  
+* Which HPX include do I need when?
+    * Linker error between luaengine and controller because of luaengine.hpp include?
+
+* Recommended build methods and examples
