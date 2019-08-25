@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to the HPX Cookbook! &mdash; HPX Cookbook 0.1 documentation</title>
+  <title>HPX Runtime Initialization &mdash; HPX Cookbook 0.1 documentation</title>
   
 
   
@@ -35,8 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Section 1 : About this Document and the associated Git Repository" href="about.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -50,7 +49,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> HPX Cookbook
+            <a href="index.html" class="icon icon-home"> HPX Cookbook
           
 
           
@@ -103,7 +102,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">HPX Cookbook</a>
+          <a href="index.html">HPX Cookbook</a>
         
       </nav>
 
@@ -132,15 +131,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Welcome to the HPX Cookbook!</li>
+      <li>HPX Runtime Initialization</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/hpx_runtime_initialization.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -153,46 +152,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-the-hpx-cookbook">
-<h1>Welcome to the HPX Cookbook!<a class="headerlink" href="#welcome-to-the-hpx-cookbook" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#part-i-moore-s-law-and-the-free-lunch-is-over-problem">Part I : Moore’s Law and “The Free Lunch is Over” problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#a-concurrency">A. Concurrency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#b-parallelism">B. Parallelism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#c-distributed-computing">C. Distributed Computing</a></li>
+  <div class="section" id="hpx-runtime-initialization">
+<h1>HPX Runtime Initialization<a class="headerlink" href="#hpx-runtime-initialization" title="Permalink to this headline">¶</a></h1>
+<dl class="simple">
+<dt>TODO:</dt><dd><ul class="simple">
+<li><p>HPX Runtime initialization (see <a class="reference external" href="https://stellar-group.github.io/hpx/docs/sphinx/branches/master/singlehtml/index.html#document-manual/starting_the_hpx_runtime">docs</a>)</p></li>
+<li><p>How to test HPX components with Catch2</p></li>
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">/examples/quickstart/init_globally.cpp</span></code></p></li>
+<li><p>Cave: Main!</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#scalability">Scalability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#amdahls-law">Amdahls Law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#the-universal-scalability-law-usl">The Universal Scalability Law “USL”</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#consequences-of-the-usl-for-writing-your-application">Consequences of the USL for writing your application</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 4: Helpful concepts to fully understand and leverage HPX</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#general-programming-concepts">General Programming Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#c-concepts">C++ Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#hpx-concepts">HPX Concepts</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 5 : A collection of HPX Recipes, HowTos and Drafts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="todo_list.html#open-questions">Open Questions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="todo_list.html#caveats-gotchas-and-quirks">Caveats, gotchas and quirks</a></li>
-</ul>
-</li>
-</ul>
-</div>
+</dd>
+</dl>
 </div>
 
 
@@ -200,13 +170,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="about.html" class="btn btn-neutral float-right" title="Section 1 : About this Document and the associated Git Repository" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-    </div>
   
 
   <hr/>

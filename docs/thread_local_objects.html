@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Static Thread Local Objects: e.g. Lua States &mdash; HPX Cookbook 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HPX Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 4: Helpful concepts to fully understand and leverage HPX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 5 : A collection of HPX Recipes, HowTos and Drafts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HPX Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Static Thread Local Objects: e.g. Lua States</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/thread_local_objects.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="static-thread-local-objects-e-g-lua-states">
+<h1>Static Thread Local Objects: e.g. Lua States<a class="headerlink" href="#static-thread-local-objects-e-g-lua-states" title="Permalink to this headline">¶</a></h1>
+<p>How to have a persistent thread local object in every worker thread which can be found by running tasks (e.g. a LuaState).</p>
+<p>If you have objects you want to use frequently from several HPX tasks, like a scripting engine, you might want to create these objects only once and then use them from any task runing on that thread.</p>
+<p>This could be done by leveraging the following</p>
+<dl class="simple">
+<dt>C++ concepts:</dt><dd><ul class="simple">
+<li><p>Function Local Static Variables: Create once and use for the entire runtime of the application</p></li>
+<li><p>Thread Local Storage: Have that object only available in a specific OS worker thread to tame possible concurrency issues.</p></li>
+<li><p>Combine the above and win!</p></li>
+</ul>
+</dd>
+</dl>
+<div class="literal-block-wrapper docutils container" id="static-thread-local-storage">
+<div class="code-block-caption"><span class="caption-text">Static Thread Local Storage  ( C++ ) “LuaEngine”</span><a class="headerlink" href="#static-thread-local-storage" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// boilerplate, includes, etc ...</span>
+
+<span class="k">struct</span> <span class="n">lua_engine</span> <span class="p">{</span>
+  <span class="n">lua_engine</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="c1">// ... initialize your LUA engine here</span>
+  <span class="p">}</span>
+  <span class="n">someReturnValueType</span> <span class="n">run_lua_code</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span> <span class="n">luaCode</span><span class="p">){</span>
+   <span class="c1">// ... implementation</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// retrieve a reference to the thread local static lua_engine</span>
+<span class="n">lua_engine</span><span class="o">&amp;</span> <span class="n">thread_local_lua_engine</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// function local static - initialized only once per OS thread</span>
+  <span class="k">static</span> <span class="k">thread_local</span> <span class="n">lua_engine</span> <span class="n">engine</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">engine</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Wrapper function to never have an invalid lua_engine reference</span>
+<span class="c1">// when calling into it and running Lua code</span>
+<span class="n">someReturnValueType</span> <span class="n">run_luacode</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span> <span class="n">luaCode</span><span class="p">){</span>
+   <span class="k">return</span> <span class="n">thread_local_lua_engine</span><span class="p">().</span><span class="n">run_lua_code</span><span class="p">(</span><span class="n">luaCode</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+ <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="n">run_luacode</span><span class="p">(</span> <span class="s">&quot;print(&#39;Hello, World!&#39;)&quot;</span> <span class="p">);</span>
+ <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>Caveat</dt><dd><p>Always get the object reference anew after a yield(), a future.get() or any other hpx::thread suspending operation.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><em>Note:</em></div>
+<div class="line">–&gt; make a wrapper for lua calls to be safe. It’s low overhead.</div>
+<div class="line"><em>Solution:</em> See wrapper function <code class="docutils literal notranslate"><span class="pre">run_luacode</span></code> above.</div>
+</div>
+<dl>
+<dt>Explanation</dt><dd><div class="line-block">
+<div class="line">If an HPX async gets suspended, it is not guaranteed, it will be resumed on the same OS worker thread. The retrieved reference to the LuaState/-Engine could (but doesn’t have to) be invalid if the task is resumed. Therefore you could not naively use any LuaState local data and believe it persists between calls, because the calls might be done in different OS threads and go to different LuaStates specific to the respective OS thread. So you have two problems to solve:</div>
+<div class="line-block">
+<div class="line">1. Always make sure you have a valid reference</div>
+<div class="line">2. Never assume persistence of local data on that object, here a LuaState / LuaEngine.</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yorlik
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

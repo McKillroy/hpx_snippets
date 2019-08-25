@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Component Serialization, Migration and Deserialization &mdash; HPX Cookbook 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> HPX Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 4: Helpful concepts to fully understand and leverage HPX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 5 : A collection of HPX Recipes, HowTos and Drafts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HPX Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Component Serialization, Migration and Deserialization</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/migration_serialization.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="component-serialization-migration-and-deserialization">
+<h1>Component Serialization, Migration and Deserialization<a class="headerlink" href="#component-serialization-migration-and-deserialization" title="Permalink to this headline">¶</a></h1>
+<p>It is possible to create components, which can be migrated to other localities. This implies, that not all components have this ability. Creating a component which can migrate is done by inheriting from <code class="docutils literal notranslate"><span class="pre">migration_support</span></code> and <code class="docutils literal notranslate"><span class="pre">component_base</span></code> with nested templates.</p>
+<div class="line-block">
+<div class="line">An example is given in the HPX codebase at</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">\tests\unit\component\migrate_component.cpp</span> <span class="pre">line</span> <span class="pre">56</span> <span class="pre">FF</span></code></div>
+</div>
+<p>Example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nl">MigratingComponent</span> <span class="p">:</span>
+     <span class="n">hpx</span><span class="o">::</span><span class="n">components</span><span class="o">::</span><span class="n">migration_support</span>
+         <span class="o">&lt;</span><span class="n">hpx</span><span class="o">::</span><span class="n">components</span><span class="o">::</span><span class="n">component_base</span>
+             <span class="o">&lt;</span><span class="n">MigratingComponent</span> <span class="o">&gt;</span> <span class="o">&gt;</span> <span class="p">{</span>
+     <span class="c1">// your code</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+<p>To enable a component to migrate you also need to provide a member function <code class="docutils literal notranslate"><span class="pre">serialize</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Archive</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">serialize</span><span class="p">(</span><span class="n">Archive</span><span class="o">&amp;</span> <span class="n">ar</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">version</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The serialize member function is a template that works both ways: As Serializer and as Deserializer. The API is identical to the boost::serialize library, but a different, HPX specific implementation.</p>
+<dl>
+<dt>The type of the archive determines how the function works. There are two types of archives:</dt><dd><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hpx::serialization::output_archive</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hpx::serialization::input_archive</span></code></div>
+</div>
+</dd>
+</dl>
+<p>Normally you don’t have to care about these, HPX is using the correct archive types automagically.</p>
+<p>From comments in the file mentioned above:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;Components which should be migrated using hpx::migrate&lt;&gt; need to
+be Serializable and CopyConstructable. Components can be
+MoveConstructable in which case the serialized data is moved into the
+component&#39;s constructor.&quot;
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">hpx::components::migrate</span></code> returns a future containing the id_type of the migrating component. The future is available once the migration is complete. So - the id_type given to <code class="docutils literal notranslate"><span class="pre">migrate</span></code> as an argument is returned in the future and a means to check weather migration is yet complete.</p>
+<p>Two conditions must be met for successful migration:
+The struct needs to inherit in the way shown above and you need a working serializer/deserializer: the <code class="docutils literal notranslate"><span class="pre">serialize()</span></code> function template.</p>
+<p><strong>Special serialization situations:</strong></p>
+<p>You can customize serialization in a way to send ANY data along with the component, by just adding it to the archive in your <code class="docutils literal notranslate"><span class="pre">serialize()</span></code> function template .</p>
+<p>You can even send any arbitrary data with the archive and such serialize and deserialize components which have dependent non-component data referenced by pointers for example. To do this you need to split the serialize function template into two functions <code class="docutils literal notranslate"><span class="pre">load()</span></code> and <code class="docutils literal notranslate"><span class="pre">save()</span></code> AND add the macro <code class="docutils literal notranslate"><span class="pre">HPX_SERIALIZATION_SPLIT_MEMBER()</span></code>
+Example taken from <code class="docutils literal notranslate"><span class="pre">\examples\quickstart\zerocopy_rdma.cpp</span> <span class="pre">line</span> <span class="pre">64</span> <span class="pre">ff</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// inside the struct:</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Archive</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="n">Archive</span><span class="o">&amp;</span> <span class="n">ar</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="k">const</span> <span class="n">version</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">ar</span> <span class="o">&gt;&gt;</span> <span class="n">size_</span> <span class="o">&gt;&gt;</span> <span class="n">t</span><span class="p">;</span>
+    <span class="n">pointer_</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">pointer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Archive</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="n">Archive</span><span class="o">&amp;</span> <span class="n">ar</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="k">const</span> <span class="n">version</span><span class="p">)</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">t</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pointer_</span><span class="p">);</span>
+    <span class="n">ar</span> <span class="o">&lt;&lt;</span> <span class="n">size_</span> <span class="o">&lt;&lt;</span> <span class="n">t</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">HPX_SERIALIZATION_SPLIT_MEMBER</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yorlik
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

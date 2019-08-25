@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to the HPX Cookbook! &mdash; HPX Cookbook 0.1 documentation</title>
+  <title>Section 3 : HPX Basics &mdash; HPX Cookbook 0.1 documentation</title>
   
 
   
@@ -36,7 +36,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Section 1 : About this Document and the associated Git Repository" href="about.html" /> 
+    <link rel="next" title="Section 4: Helpful concepts to fully understand and leverage HPX" href="concepts.html" />
+    <link rel="prev" title="Section 2 : Scalability, Amdahls Law and the USL" href="scalability.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -50,7 +51,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> HPX Cookbook
+            <a href="index.html" class="icon icon-home"> HPX Cookbook
           
 
           
@@ -81,11 +82,15 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Section 3 : HPX Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 4: Helpful concepts to fully understand and leverage HPX</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 5 : A collection of HPX Recipes, HowTos and Drafts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
@@ -103,7 +108,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">HPX Cookbook</a>
+          <a href="index.html">HPX Cookbook</a>
         
       </nav>
 
@@ -132,15 +137,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Welcome to the HPX Cookbook!</li>
+      <li>Section 3 : HPX Basics</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/hpx_basics.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -153,44 +158,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-the-hpx-cookbook">
-<h1>Welcome to the HPX Cookbook!<a class="headerlink" href="#welcome-to-the-hpx-cookbook" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#part-i-moore-s-law-and-the-free-lunch-is-over-problem">Part I : Moore’s Law and “The Free Lunch is Over” problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#a-concurrency">A. Concurrency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#b-parallelism">B. Parallelism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#c-distributed-computing">C. Distributed Computing</a></li>
+  <div class="section" id="section-3-hpx-basics">
+<h1>Section 3 : HPX Basics<a class="headerlink" href="#section-3-hpx-basics" title="Permalink to this headline">¶</a></h1>
+<p>HPX is a standards conformant runtime written in C++ which can help you to parallelize your application with minimal overhead.</p>
+<p>It specifically targets the problems of</p>
+<dl class="simple">
+<dt>Starvation</dt><dd><p>occurs when there is insufficient concurrent work available to maintain high utilization of all resources.</p>
+</dd>
+<dt>Latencies</dt><dd><p>are imposed by the time-distance delay intrinsic to accessing remote resources and services.</p>
+</dd>
+<dt>Overhead</dt><dd><p>is work required for the management of parallel actions and resources on the critical execution path which is not necessary in a sequential variant.</p>
+</dd>
+<dt>Waiting</dt><dd><p>for contention resolution is the delay due to the lack of availability of oversubscribed shared resources.</p>
+</dd>
+</dl>
+<p>The Definitions above are copied from the HPX Documentation: <a class="reference external" href="https://stellar-group.github.io/hpx/docs/sphinx/branches/master/singlehtml/index.html#what-makes-our-systems-slow">What makes our systems slow?</a></p>
+<p>HPX is an implementation of the <strong>ParalleX</strong> model of execution:</p>
+<dl class="simple">
+<dt>ParalleX</dt><dd><p>Citation and .pdf download Links: <a class="reference external" href="https://www.researchgate.net/publication/220953286_ParalleX_A_Study_of_A_New_Parallel_Computation_Model">ParalleX: A Study of A New Parallel Computation Model</a></p>
+</dd>
+</dl>
+<div class="section" id="what-can-hpx-do-for-you">
+<h2>What can HPX do for you?<a class="headerlink" href="#what-can-hpx-do-for-you" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Help parallelizing your application and increasing CPU and node Utilization with a</p></li>
+<li><p>Standards conformant interface</p></li>
+<li><p>Load Balancing</p></li>
+<li><p>Glueing together your distributed cluster</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#scalability">Scalability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#amdahls-law">Amdahls Law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#the-universal-scalability-law-usl">The Universal Scalability Law “USL”</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#consequences-of-the-usl-for-writing-your-application">Consequences of the USL for writing your application</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 4: Helpful concepts to fully understand and leverage HPX</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#general-programming-concepts">General Programming Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#c-concepts">C++ Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#hpx-concepts">HPX Concepts</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 5 : A collection of HPX Recipes, HowTos and Drafts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="todo_list.html#open-questions">Open Questions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="todo_list.html#caveats-gotchas-and-quirks">Caveats, gotchas and quirks</a></li>
-</ul>
-</li>
+</div>
+<div class="section" id="what-can-hpx-not-do-for-you">
+<h2>What can HPX NOT do for you<a class="headerlink" href="#what-can-hpx-not-do-for-you" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Automagically parallelize your code and make a badly written application fast.</p></li>
+<li><p>Remove all danger of race conditions</p></li>
 </ul>
 </div>
 </div>
@@ -203,8 +204,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="about.html" class="btn btn-neutral float-right" title="Section 1 : About this Document and the associated Git Repository" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="concepts.html" class="btn btn-neutral float-right" title="Section 4: Helpful concepts to fully understand and leverage HPX" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
+      
+        <a href="scalability.html" class="btn btn-neutral float-left" title="Section 2 : Scalability, Amdahls Law and the USL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to the HPX Cookbook! &mdash; HPX Cookbook 0.1 documentation</title>
+  <title>Section 4: Helpful concepts to fully understand and leverage HPX &mdash; HPX Cookbook 0.1 documentation</title>
   
 
   
@@ -36,7 +36,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Section 1 : About this Document and the associated Git Repository" href="about.html" /> 
+    <link rel="next" title="Section 5 : A collection of HPX Recipes, HowTos and Drafts" href="recipes.html" />
+    <link rel="prev" title="Section 3 : HPX Basics" href="hpx_basics.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -50,7 +51,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> HPX Cookbook
+            <a href="index.html" class="icon icon-home"> HPX Cookbook
           
 
           
@@ -81,12 +82,17 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 4: Helpful concepts to fully understand and leverage HPX</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Section 4: Helpful concepts to fully understand and leverage HPX</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-programming-concepts">General Programming Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c-concepts">C++ Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hpx-concepts">HPX Concepts</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 5 : A collection of HPX Recipes, HowTos and Drafts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
 </ul>
@@ -103,7 +109,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">HPX Cookbook</a>
+          <a href="index.html">HPX Cookbook</a>
         
       </nav>
 
@@ -132,15 +138,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Welcome to the HPX Cookbook!</li>
+      <li>Section 4: Helpful concepts to fully understand and leverage HPX</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/concepts.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -153,44 +159,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-the-hpx-cookbook">
-<h1>Welcome to the HPX Cookbook!<a class="headerlink" href="#welcome-to-the-hpx-cookbook" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#part-i-moore-s-law-and-the-free-lunch-is-over-problem">Part I : Moore’s Law and “The Free Lunch is Over” problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#a-concurrency">A. Concurrency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#b-parallelism">B. Parallelism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#c-distributed-computing">C. Distributed Computing</a></li>
+  <div class="section" id="section-4-helpful-concepts-to-fully-understand-and-leverage-hpx">
+<h1>Section 4: Helpful concepts to fully understand and leverage HPX<a class="headerlink" href="#section-4-helpful-concepts-to-fully-understand-and-leverage-hpx" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-programming-concepts">
+<h2>General Programming Concepts<a class="headerlink" href="#general-programming-concepts" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Type_safety">Typesafety</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Serialization">Serialization</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a></p></li>
+<li><p>Operating System Threads and Userspace Threads (a.k.a. “Green Threads”, “Fibers”, “Tasks”, “Coroutines”, etc.)</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#scalability">Scalability</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#amdahls-law">Amdahls Law</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#the-universal-scalability-law-usl">The Universal Scalability Law “USL”</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scalability.html#consequences-of-the-usl-for-writing-your-application">Consequences of the USL for writing your application</a></li>
+</div>
+<div class="section" id="c-concepts">
+<h2>C++ Concepts<a class="headerlink" href="#c-concepts" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>C++ Template language basics</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern">CRTP</a></p></li>
+<li><p>Function Local Static Variables combined with  Thread Local Storage</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 4: Helpful concepts to fully understand and leverage HPX</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#general-programming-concepts">General Programming Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#c-concepts">C++ Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#hpx-concepts">HPX Concepts</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 5 : A collection of HPX Recipes, HowTos and Drafts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="todo_list.html#open-questions">Open Questions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="todo_list.html#caveats-gotchas-and-quirks">Caveats, gotchas and quirks</a></li>
-</ul>
-</li>
+</div>
+<div class="section" id="hpx-concepts">
+<h2>HPX Concepts<a class="headerlink" href="#hpx-concepts" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>HPX Components, “Server” and “Client” Components</p></li>
+<li><p>HPX Serialization Implementation</p></li>
+<li><p>HPX Migration, Parcel</p></li>
+<li><p>HPX Macros</p></li>
+<li><p>AGAS</p></li>
 </ul>
 </div>
 </div>
@@ -203,8 +198,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="about.html" class="btn btn-neutral float-right" title="Section 1 : About this Document and the associated Git Repository" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="recipes.html" class="btn btn-neutral float-right" title="Section 5 : A collection of HPX Recipes, HowTos and Drafts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
+      
+        <a href="hpx_basics.html" class="btn btn-neutral float-left" title="Section 3 : HPX Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
