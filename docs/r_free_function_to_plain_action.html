@@ -189,7 +189,7 @@
 <h2>Case 1 : Free function in the main program source in global namespace<a class="headerlink" href="#case-1-free-function-in-the-main-program-source-in-global-namespace" title="Permalink to this headline">¶</a></h2>
 <p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_1</span></code></p>
 <dl class="simple">
-<dt>Needed Macros:</dt><dd><p>main.cpp: <strong>HPX_PLAIN_ACTION</strong></p>
+<dt>Needed Macros:</dt><dd><p>main.cpp: <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L210">HPX_PLAIN_ACTION</a></p>
 </dd>
 </dl>
 <p>This is the most simple case, but also limited. It would not work for a header file because it would create double definitions when included into several source files.</p>
@@ -220,7 +220,7 @@
 </pre></div>
 </div>
 <div class="line-block">
-<div class="line"><strong>HPX_PLAIN_ACTION</strong> <em>defines</em> a free function AND <em>registers</em> it with HPX.</div>
+<div class="line"><a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L210">HPX_PLAIN_ACTION</a> <em>defines</em> a free function AND <em>registers</em> it with HPX.</div>
 <div class="line">It could be called from other localities like this:</div>
 </div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//example action invocation</span>
@@ -232,7 +232,7 @@
 <h2>Case 2 : Free function in the main program source in custom namespace<a class="headerlink" href="#case-2-free-function-in-the-main-program-source-in-custom-namespace" title="Permalink to this headline">¶</a></h2>
 <p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_2</span></code></p>
 <dl class="simple">
-<dt>Needed Macros:</dt><dd><p>main.cpp: <strong>HPX_PLAIN_ACTION</strong></p>
+<dt>Needed Macros:</dt><dd><p>main.cpp: <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L210">HPX_PLAIN_ACTION</a></p>
 </dd>
 </dl>
 <p>This case works almost the same as case 1. You just have to apply the fully qualified function name to the macro instead. The namespace does NOT appear on the action, because it was defined and registered in the global namespace.</p>
@@ -264,7 +264,7 @@
 </pre></div>
 </div>
 <div class="line-block">
-<div class="line"><strong>HPX_PLAIN_ACTION</strong> <em>defines</em> a free function AND <em>registers</em> it with HPX.</div>
+<div class="line"><a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L210">HPX_PLAIN_ACTION</a> <em>defines</em> a free function AND <em>registers</em> it with HPX.</div>
 <div class="line">It could be called from other localities like this:</div>
 </div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//example action invocation</span>
@@ -278,8 +278,8 @@
 <p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_3</span></code></p>
 <dl>
 <dt>Needed Macros:</dt><dd><div class="line-block">
-<div class="line">header file: <strong>HPX_DEFINE_PLAIN_ACTION</strong>, <strong>HPX_REGISTER_ACTION_DECLARATION</strong></div>
-<div class="line">source file: <strong>HPX_REGISTER_ACTION</strong></div>
+<div class="line">header file: <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L121">HPX_DEFINE_PLAIN_ACTION</a>, <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/basic_action.hpp#L867">HPX_REGISTER_ACTION_DECLARATION</a></div>
+<div class="line">source file: <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/basic_action.hpp#L923">HPX_REGISTER_ACTION</a></div>
 </div>
 </dd>
 </dl>
@@ -355,8 +355,8 @@
 <p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_4</span></code></p>
 <dl>
 <dt>Macros needed:</dt><dd><div class="line-block">
-<div class="line">Library header: <strong>HPX_COMPONENT_EXPORT</strong>, <strong>HPX_DEFINE_PLAIN_ACTION</strong>, <strong>HPX_REGISTER_ACTION_DECLARATION</strong></div>
-<div class="line">Library source file: <strong>HPX_REGISTER_ACTION</strong></div>
+<div class="line">Library header: <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/libs/config/include/hpx/config/export_definitions.hpp#L70">HPX_COMPONENT_EXPORT</a>, <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L121">HPX_DEFINE_PLAIN_ACTION</a>, <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/basic_action.hpp#L867">HPX_REGISTER_ACTION_DECLARATION</a></div>
+<div class="line">Library source file: <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/basic_action.hpp#L923">HPX_REGISTER_ACTION</a></div>
 </div>
 </dd>
 </dl>
@@ -364,7 +364,7 @@
 <blockquote>
 <div><p>If you look closely, then you will easily see, that the only difference to case 3 here is, that you need the <strong>HPX_COMPONENT_EXPORT</strong> macro here to get the shared library symbol export. The rest it pretty much identical.</p>
 </div></blockquote>
-<p><strong>Step 1:</strong> Library Header File: Contains Function <em>declaration</em> and action <em>definition</em> along with the <strong>HPX_COMPONENT_EXPORT</strong> macro for symbol export:</p>
+<p><strong>Step 1:</strong> Library Header File: Contains Function <em>declaration</em> and action <em>definition</em> along with the <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/libs/config/include/hpx/config/export_definitions.hpp#L70">HPX_COMPONENT_EXPORT</a> macro for symbol export:</p>
 <blockquote>
 <div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// file: actions.hpp</span>
 <span class="cp">#pragma once</span>
@@ -392,9 +392,9 @@
 <div class="line-block">
 <div class="line"><strong>Note:</strong></div>
 <div class="line-block">
-<div class="line"><strong>HPX_COMPONENT_EXPORT</strong> is necessary, or the function will not be exported and you’ll get a missing symbol error at link time.</div>
-<div class="line"><strong>Caveat:</strong> The name of the <strong>HPX_COMPONENT_EXPORT</strong> macro is confusing: It works for <em>plain actions</em> as well as for <em>components</em> and their <em>component actions</em>. It simply expands to __declspec(dllimport).</div>
-<div class="line"><strong>HPX_DEFINE_PLAIN_ACTION</strong> can be inside the namespace or in the global namespace. The function is referenced by its fully qualified name out of the perspective of the macro placement, the action identifier must be a C++ conformant identifier for serialization purposes. (Best stick with numbers, letters, underscores …). If you decide to put the Macro inside the namespace, you must reference the action in step 2 and 3 with the namespace in front of it like <code class="docutils literal notranslate"><span class="pre">app::myFreeFunction_Action</span></code>.</div>
+<div class="line"><a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/libs/config/include/hpx/config/export_definitions.hpp#L70">HPX_COMPONENT_EXPORT</a> is necessary, or the function will not be exported and you’ll get a missing symbol error at link time.</div>
+<div class="line"><strong>Caveat:</strong> The name of the <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/libs/config/include/hpx/config/export_definitions.hpp#L70">HPX_COMPONENT_EXPORT</a> macro is confusing: It works for <em>plain actions</em> as well as for <em>components</em> and their <em>component actions</em>. It simply expands to __declspec(dllimport).</div>
+<div class="line"><a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L121">HPX_DEFINE_PLAIN_ACTION</a> can be inside the namespace or in the global namespace. The function is referenced by its fully qualified name out of the perspective of the macro placement, the action identifier must be a C++ conformant identifier for serialization purposes. (Best stick with numbers, letters, underscores …). If you decide to put the Macro inside the namespace, you must reference the action in step 2 and 3 with the namespace in front of it like <code class="docutils literal notranslate"><span class="pre">app::myFreeFunction_Action</span></code>.</div>
 </div>
 </div>
 <p><strong>Step 2:</strong> Library source file: <em>Function implementation</em> and <em>action registration</em>:</p>
@@ -422,8 +422,8 @@
 <div class="line-block">
 <div class="line"><strong>Note:</strong></div>
 <div class="line-block">
-<div class="line"><strong>HPX_REGISTER_ACTION</strong> MUST be in the global namespace. It is sufficient to just reference the action name you have chosen in the header here.</div>
-<div class="line">It is NOT necessary to specify the <strong>HPX_COMPONENT_EXPORT</strong> Macro again.</div>
+<div class="line"><a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/basic_action.hpp#L923">HPX_REGISTER_ACTION</a> MUST be in the global namespace. It is sufficient to just reference the action name you have chosen in the header here.</div>
+<div class="line">It is NOT necessary to specify the <a class="reference external" href="https://github.com/STEllAR-GROUP/hpx/blob/master/libs/config/include/hpx/config/export_definitions.hpp#L70">HPX_COMPONENT_EXPORT</a> Macro again.</div>
 </div>
 </div>
 <p><strong>Step 3:</strong> Library user: <em>Action invocation</em> in the executable or whoever uses this library:</p>
