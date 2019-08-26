@@ -15,7 +15,7 @@ What exactly do the Macros do? what is the underlying mechanic?
 
  
 * Which of HPX includes do I need when?
-    On include to rule them all: ``<hpx/hpx.hpp>`` - how to narrow scope?
+    One include to rule them all: ``<hpx/hpx.hpp>`` - how to narrow scope?
 
 
 * Recommended build methods and examples.

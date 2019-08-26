@@ -22,7 +22,7 @@ HPX_DECLARE_ACTION and HPX_DECLARE_PLAIN_ACTION
 
     *Undocumented*
 
-**Note:** These macros after a chain of macros finally lead to HPX_DECLARE_ACTION_2 which ends up with a simple struct declaration where tzhe name depends on the parameters:
+**Note:** These macros after a chain of macros finally lead to HPX_DECLARE_ACTION_2 which ends up with a simple struct declaration where the name depends on the parameters:
 
 .. code-block:: C++
 

@@ -1,4 +1,4 @@
-Section 2 : Scalability, Amdahls Law and the USL
+Section 3 : Scalability, Amdahls Law and the USL
 =======================================
 
 

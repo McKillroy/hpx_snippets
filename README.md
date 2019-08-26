@@ -8,3 +8,5 @@ None of the information presented here should be considered accurate, complete o
 Any code snippets taken from the HPX repository fall under their license.
 
 Use at your own risk - you have been warned!
+
+A web rendering of this documentation can be found here:  https://mckillroy.github.io/hpx_snippets

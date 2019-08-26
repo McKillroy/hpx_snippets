@@ -83,10 +83,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 4: Helpful concepts to fully understand and leverage HPX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 5 : A collection of HPX Recipes, HowTos and Drafts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Helpful concepts to fully understand and leverage HPX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 6 : A collection of HPX Recipes, HowTos and Drafts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
 </ul>
 
@@ -156,7 +156,7 @@
 <h1>Creating and Referencing Components<a class="headerlink" href="#creating-and-referencing-components" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="boilerplate">
 <h2>Boilerplate:<a class="headerlink" href="#boilerplate" title="Permalink to this headline">¶</a></h2>
-<p>Mind you - I am abbreviating stuff:</p>
+<p>I am abbreviating stuff:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">hpx</span><span class="o">::</span><span class="n">naming</span><span class="o">::</span><span class="n">id_type</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">hpx</span><span class="o">::</span><span class="n">future</span><span class="p">;</span>
@@ -165,12 +165,11 @@
 <span class="k">using</span> <span class="n">hpx</span><span class="o">::</span><span class="n">get_ptr</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Lets get started:</p>
 </div>
 <div class="section" id="instancing">
 <h2>Instancing<a class="headerlink" href="#instancing" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">future</span><span class="o">&lt;</span><span class="n">id_type</span><span class="o">&gt;</span> <span class="n">new_</span><span class="o">&lt;</span><span class="n">Component</span><span class="o">&gt;</span><span class="p">(</span><span class="n">id_type</span><span class="p">)</span>
-<span class="c1">// in real code:</span>
+<span class="c1">// real code example:</span>
 <span class="k">auto</span> <span class="n">my_thing_fut</span> <span class="o">=</span> <span class="n">new_</span><span class="o">&lt;</span><span class="n">my_thing_type</span><span class="o">&gt;</span><span class="p">(</span> <span class="n">find_here</span><span class="p">()</span> <span class="p">)</span>
 </pre></div>
 </div>
@@ -203,23 +202,26 @@ So - you might just abbreviate it to:</p>
 <span class="k">auto</span> <span class="n">my_thing_shptr</span> <span class="o">=</span> <span class="n">my_thing_shptr_fut</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>There are caveats:</p>
-<ol class="arabic simple">
+<dl>
+<dt>Caveats</dt><dd><ol class="arabic">
 <li><p><code class="docutils literal notranslate"><span class="pre">get_ptr&lt;&gt;</span></code> works on only if the id refers to an object that is local to its invocation (same locality).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">get_ptr&lt;&gt;</span></code> actually returns a <code class="docutils literal notranslate"><span class="pre">future&lt;shared_ptr&lt;&gt;&gt;</span></code>, but you don’t need to use <code class="docutils literal notranslate"><span class="pre">get_ptr&lt;&gt;</span></code> as you can always use ‘id’ to refer to the instance.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">get_ptr&lt;&gt;</span></code> would give you some optimization, but prevents the object from being migrated as long as you hold a shared_ptr to it.</p></li>
-</ol>
-<p>There is a sync overload to get the pointer:</p>
-<blockquote>
-<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">get_ptr</span><span class="o">&lt;</span><span class="n">Component</span><span class="o">&gt;</span><span class="p">(</span><span class="n">hpx</span><span class="o">::</span><span class="n">launch</span><span class="o">::</span><span class="n">sync</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span>
+<li><p>There is a <code class="docutils literal notranslate"><span class="pre">sync</span> <span class="pre">overload</span></code> to get the pointer:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">get_ptr</span><span class="o">&lt;</span><span class="n">Component</span><span class="o">&gt;</span><span class="p">(</span><span class="n">hpx</span><span class="o">::</span><span class="n">launch</span><span class="o">::</span><span class="n">sync</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span>
 </pre></div>
 </div>
+</li>
+</ol>
+<blockquote>
+<div><p>here ‘p’ is not a future, but the shared_ptr&lt;&gt; directly.</p>
 </div></blockquote>
-<p>here ‘p’ is not a future, but the shared_ptr&lt;&gt; directly.</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="destroying-components">
 <h2>Destroying Components<a class="headerlink" href="#destroying-components" title="Permalink to this headline">¶</a></h2>
-<p>Components are Garbage Collected after going out of scope and having shared pointers released.</p>
+<p>Components are Garbage Collected after going out of scope and having all shared pointers released.</p>
 </div>
 </div>
 
@@ -234,7 +236,7 @@ So - you might just abbreviate it to:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Yorlik
+        &copy; Copyright 2019, Yorlik, https://github.com/McKillroy/hpx_snippets
 
     </p>
   </div>

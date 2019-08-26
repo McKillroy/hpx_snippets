@@ -6,7 +6,7 @@ Creating and Referencing Components
 Boilerplate:
 ...............
 
-Mind you - I am abbreviating stuff:
+I am abbreviating stuff:
 
 .. code-block:: cpp
 
@@ -17,16 +17,13 @@ Mind you - I am abbreviating stuff:
    using hpx::local_new;
    using hpx::get_ptr;
    
-
-Lets get started: 
-
 Instancing
 ...........
 
 .. code-block:: cpp
 
    future<id_type> new_<Component>(id_type)
-   // in real code:
+   // real code example:
    auto my_thing_fut = new_<my_thing_type>( find_here() )
 
 creates a new instance of component on locality *`id_type`* and returns an hpx::future to it
@@ -69,23 +66,21 @@ Now, for local and direct ( = faster) access to the instance you might want to h
    auto my_thing_shptr_fut = get_ptr <my_thing_type> (my_thing_id); 
    auto my_thing_shptr = my_thing_shptr_fut.get();
 
-There are caveats: 
+Caveats 
+   #. ``get_ptr<>`` works on only if the id refers to an object that is local to its invocation (same locality). 
+   #. ``get_ptr<>`` actually returns a ``future<shared_ptr<>>``, but you don't need to use ``get_ptr<>`` as you can always use 'id' to refer to the instance.
+   #. ``get_ptr<>`` would give you some optimization, but prevents the object from being migrated as long as you hold a shared_ptr to it. 
+   #. There is a ``sync overload`` to get the pointer: 
 
-#. ``get_ptr<>`` works on only if the id refers to an object that is local to its invocation (same locality). 
-#. ``get_ptr<>`` actually returns a ``future<shared_ptr<>>``, but you don't need to use ``get_ptr<>`` as you can always use 'id' to refer to the instance.
-#. ``get_ptr<>`` would give you some optimization, but prevents the object from being migrated as long as you hold a shared_ptr to it. 
+      .. code-block:: cpp
 
-There is a sync overload to get the pointer: 
+            auto p = get_ptr<Component>(hpx::launch::sync, id);
 
-  .. code-block:: cpp
-
-   auto p = get_ptr<Component>(hpx::launch::sync, id);
-
-here 'p' is not a future, but the shared_ptr<> directly.
+    here 'p' is not a future, but the shared_ptr<> directly.
 
 
 Destroying Components
 .......................
 
-Components are Garbage Collected after going out of scope and having shared pointers released.
+Components are Garbage Collected after going out of scope and having all shared pointers released.
 

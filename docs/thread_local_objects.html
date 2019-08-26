@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Static Thread Local Objects: e.g. Lua States &mdash; HPX Cookbook 0.1 documentation</title>
+  <title>Leveraging Static Thread Local Objects to initialize Worker threads: e.g. Lua States &mdash; HPX Cookbook 0.1 documentation</title>
   
 
   
@@ -83,10 +83,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 4: Helpful concepts to fully understand and leverage HPX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 5 : A collection of HPX Recipes, HowTos and Drafts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Helpful concepts to fully understand and leverage HPX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 6 : A collection of HPX Recipes, HowTos and Drafts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
 </ul>
 
@@ -133,7 +133,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Static Thread Local Objects: e.g. Lua States</li>
+      <li>Leveraging Static Thread Local Objects to initialize Worker threads: e.g. Lua States</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -152,8 +152,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="static-thread-local-objects-e-g-lua-states">
-<h1>Static Thread Local Objects: e.g. Lua States<a class="headerlink" href="#static-thread-local-objects-e-g-lua-states" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="leveraging-static-thread-local-objects-to-initialize-worker-threads-e-g-lua-states">
+<h1>Leveraging Static Thread Local Objects to initialize Worker threads: e.g. Lua States<a class="headerlink" href="#leveraging-static-thread-local-objects-to-initialize-worker-threads-e-g-lua-states" title="Permalink to this headline">¶</a></h1>
 <p>How to have a persistent thread local object in every worker thread which can be found by running tasks (e.g. a LuaState).</p>
 <p>If you have objects you want to use frequently from several HPX tasks, like a scripting engine, you might want to create these objects only once and then use them from any task runing on that thread.</p>
 <p>This could be done by leveraging the following</p>
@@ -199,16 +199,12 @@
 </pre></div>
 </div>
 </div>
-<dl class="simple">
-<dt>Caveat</dt><dd><p>Always get the object reference anew after a yield(), a future.get() or any other hpx::thread suspending operation.</p>
-</dd>
-</dl>
-<div class="line-block">
-<div class="line"><em>Note:</em></div>
-<div class="line">–&gt; make a wrapper for lua calls to be safe. It’s low overhead.</div>
-<div class="line"><em>Solution:</em> See wrapper function <code class="docutils literal notranslate"><span class="pre">run_luacode</span></code> above.</div>
-</div>
 <dl>
+<dt>Caveat</dt><dd><div class="line-block">
+<div class="line">Always get the object reference anew after a yield(), a future.get() or any other hpx::thread suspending operation.</div>
+<div class="line"><strong>Note:</strong> Make a wrapper for lua calls to be safe. It’s low overhead. (See above <code class="docutils literal notranslate"><span class="pre">run_luacode</span></code> )</div>
+</div>
+</dd>
 <dt>Explanation</dt><dd><div class="line-block">
 <div class="line">If an HPX async gets suspended, it is not guaranteed, it will be resumed on the same OS worker thread. The retrieved reference to the LuaState/-Engine could (but doesn’t have to) be invalid if the task is resumed. Therefore you could not naively use any LuaState local data and believe it persists between calls, because the calls might be done in different OS threads and go to different LuaStates specific to the respective OS thread. So you have two problems to solve:</div>
 <div class="line-block">
@@ -231,7 +227,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Yorlik
+        &copy; Copyright 2019, Yorlik, https://github.com/McKillroy/hpx_snippets
 
     </p>
   </div>

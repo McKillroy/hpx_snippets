@@ -1,5 +1,5 @@
-Static Thread Local Objects: e.g. Lua States 
-=============================================
+Leveraging Static Thread Local Objects to initialize Worker threads: e.g. Lua States 
+=========================================================================================
 
 How to have a persistent thread local object in every worker thread which can be found by running tasks (e.g. a LuaState).
 
@@ -49,10 +49,8 @@ C++ concepts:
 
 
 Caveat
-  Always get the object reference anew after a yield(), a future.get() or any other hpx::thread suspending operation.
-| *Note:*
-| --> make a wrapper for lua calls to be safe. It's low overhead.
-| *Solution:* See wrapper function ``run_luacode`` above.
+  | Always get the object reference anew after a yield(), a future.get() or any other hpx::thread suspending operation.
+  | **Note:** Make a wrapper for lua calls to be safe. It's low overhead. (See above ``run_luacode`` )  
 
 Explanation
   | If an HPX async gets suspended, it is not guaranteed, it will be resumed on the same OS worker thread. The retrieved reference to the LuaState/-Engine could (but doesn't have to) be invalid if the task is resumed. Therefore you could not naively use any LuaState local data and believe it persists between calls, because the calls might be done in different OS threads and go to different LuaStates specific to the respective OS thread. So you have two problems to solve: 

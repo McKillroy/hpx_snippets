@@ -1,5 +1,5 @@
 
-Section 4: Helpful concepts to fully understand and leverage HPX
+Section 5: Helpful concepts to fully understand and leverage HPX
 =====================================================================
 
 

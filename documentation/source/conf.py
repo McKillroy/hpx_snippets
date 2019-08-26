@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'HPX Cookbook'
-copyright = '2019, Yorlik'
+copyright = '2019, Yorlik, https://github.com/McKillroy/hpx_snippets'
 author = 'Yorlik'
 
 # The full version, including alpha/beta/rc tags

@@ -1,5 +1,5 @@
 
-Section 3 : HPX Basics
+Section 4 : HPX Basics
 ==========================
 
 HPX is a standards conformant runtime written in C++ which can help you to parallelize your application with minimal overhead.

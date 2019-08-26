@@ -1,5 +1,5 @@
-Component Clients for Typesafety
-=================================
+What are "Client" Components (Typesafety)
+=============================================
 
 What are component "server" and "client" objects?
 -------------------------------------------------

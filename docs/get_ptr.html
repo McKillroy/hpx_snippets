@@ -83,10 +83,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 2 : Scalability, Amdahls Law and the USL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 3 : HPX Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 4: Helpful concepts to fully understand and leverage HPX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 5 : A collection of HPX Recipes, HowTos and Drafts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Helpful concepts to fully understand and leverage HPX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 6 : A collection of HPX Recipes, HowTos and Drafts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
 </ul>
 
@@ -160,14 +160,17 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="c1">// Overload 1/4</span>
  <span class="n">hpx</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span> <span class="o">&lt;</span><span class="n">Component</span><span class="o">&gt;</span> <span class="o">&gt;</span>
  <span class="n">hpx</span><span class="o">::</span><span class="n">get_ptr</span><span class="p">(</span> <span class="n">naming</span><span class="o">::</span><span class="n">id_type</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">id</span> <span class="p">)</span>
+
  <span class="c1">// Overload 2/4</span>
  <span class="n">hpx</span><span class="o">::</span><span class="n">future</span> <span class="o">&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span>
    <span class="o">&lt;</span><span class="k">typename</span> <span class="n">components</span><span class="o">::</span><span class="n">client_base</span><span class="o">&lt;</span><span class="n">Derived</span><span class="p">,</span> <span class="n">Stub</span><span class="o">&gt;::</span><span class="n">server_component_type</span><span class="o">&gt;</span> <span class="o">&gt;</span>
  <span class="n">hpx</span><span class="o">::</span><span class="n">get_ptr</span><span class="p">(</span> <span class="n">components</span><span class="o">::</span><span class="n">client_base</span><span class="o">&lt;</span> <span class="n">Derived</span><span class="p">,</span> <span class="n">Stub</span> <span class="o">&gt;</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">c</span> <span class="p">)</span>
+
  <span class="c1">// Overload 3/4</span>
  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span> <span class="n">Component</span> <span class="o">&gt;</span>
  <span class="n">hpx</span><span class="o">::</span><span class="n">get_ptr</span><span class="p">(</span> <span class="n">launch</span><span class="o">::</span><span class="n">sync_policy</span><span class="p">,</span> <span class="n">naming</span><span class="o">::</span><span class="n">id_type</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">id</span><span class="p">,</span>
                <span class="n">error_code</span> <span class="o">&amp;</span> <span class="n">ec</span> <span class="o">=</span> <span class="k">throws</span> <span class="p">)</span>
+
  <span class="c1">// Overload 4/4</span>
  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span> <span class="k">typename</span> <span class="n">components</span><span class="o">::</span><span class="n">client_base</span><span class="o">&lt;</span><span class="n">Derived</span><span class="p">,</span> <span class="n">Stub</span><span class="o">&gt;::</span><span class="n">server_component_type</span> <span class="o">&gt;</span>
  <span class="n">hpx</span><span class="o">::</span><span class="n">get_ptr</span><span class="p">(</span> <span class="n">launch</span><span class="o">::</span><span class="n">sync_policy</span> <span class="n">p</span><span class="p">,</span>
@@ -177,7 +180,10 @@
 </pre></div>
 </div>
 </div>
-<p><strong>CAVEAT:</strong> If you create components which are meant to migrate between localities, migrating them is not possible, as long as you hold shared pointers to them!</p>
+<dl class="simple">
+<dt><strong>CAVEAT:</strong></dt><dd><p>If you create components which are meant to migrate between localities, migrating them is not possible, as long as you hold shared pointers to them!</p>
+</dd>
+</dl>
 </div>
 
 
@@ -191,7 +197,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Yorlik
+        &copy; Copyright 2019, Yorlik, https://github.com/McKillroy/hpx_snippets
 
     </p>
   </div>
