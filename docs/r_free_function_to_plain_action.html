@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Exporting a free function which also lives in a namespace, from a shared library (.dll or .so), and use it as plain Action &mdash; HPX Cookbook 0.1 documentation</title>
+  <title>How to make Plain Actions from Free Functions &mdash; HPX Cookbook 0.1 documentation</title>
   
 
   
@@ -133,7 +133,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Exporting a free function which also lives in a namespace, from a shared library (.dll or .so), and use it as plain  Action</li>
+      <li>How to make Plain Actions from Free Functions</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -152,53 +152,305 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="exporting-a-free-function-which-also-lives-in-a-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action">
-<h1>Exporting a free function which also lives in a namespace, from a shared library (.dll or .so), and use it as plain  Action<a class="headerlink" href="#exporting-a-free-function-which-also-lives-in-a-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action" title="Permalink to this headline">¶</a></h1>
-<p><strong>Step 1:</strong> Function Declaration in the shared library header:</p>
-<blockquote>
-<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">app</span> <span class="p">{</span>
-    <span class="n">HPX_COMPONENT_EXPORT</span> <span class="kt">void</span> <span class="n">myFreeFunction</span><span class="p">();</span>
+  <div class="section" id="how-to-make-plain-actions-from-free-functions">
+<h1>How to make Plain Actions from Free Functions<a class="headerlink" href="#how-to-make-plain-actions-from-free-functions" title="Permalink to this headline">¶</a></h1>
+<dl class="simple">
+<dt>Use Case Variables:</dt><dd><ol class="arabic simple">
+<li><dl class="simple">
+<dt>Free Function Namespace</dt><dd><ul class="simple">
+<li><p>Inside a namespace</p></li>
+<li><p>In the global namespace</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Free Function location and linkage</dt><dd><ul class="simple">
+<li><p>In main program source</p></li>
+<li><p>In a separate header/source file pair</p></li>
+<li><p>Inside a static or shared library</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Free function return type</dt><dd><ul class="simple">
+<li><p>returning a value</p></li>
+<li><p>void return value</p></li>
+<li><p>This just influences the way how the action created from it can be invoked.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+<div class="section" id="case-1-free-function-in-the-main-program-source-in-global-namespace">
+<h2>Case 1 : Free function in the main program source in global namespace<a class="headerlink" href="#case-1-free-function-in-the-main-program-source-in-global-namespace" title="Permalink to this headline">¶</a></h2>
+<p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_1</span></code></p>
+<dl class="simple">
+<dt>Needed Macros:</dt><dd><p>main.cpp: <strong>HPX_PLAIN_ACTION</strong></p>
+</dd>
+</dl>
+<p>This is the most simple case, but also limited. It would not work for a header file because it would create double definitions when included into several source files.</p>
+<p>Example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx_main.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="c1">// Free function in GLOBAL namespace in main program</span>
+<span class="kt">int</span> <span class="nf">compute_something</span><span class="p">(</span><span class="kt">int</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">data</span> <span class="o">*</span> <span class="mi">42</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="n">HPX_DEFINE_PLAIN_ACTION</span> <span class="p">(</span> <span class="n">app</span><span class="o">::</span><span class="n">myFreeFunction</span><span class="p">,</span> <span class="n">myFreeFunction_Action</span> <span class="p">);</span>
+<span class="n">HPX_PLAIN_ACTION</span><span class="p">(</span><span class="n">compute_something</span><span class="p">,</span> <span class="n">compute_something_action</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Case 1:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// template parameter: Action name</span>
+    <span class="k">auto</span> <span class="n">m_fut</span> <span class="o">=</span> <span class="n">hpx</span><span class="o">::</span><span class="n">async</span><span class="o">&lt;</span><span class="n">compute_something_action</span><span class="o">&gt;</span><span class="p">(</span><span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span><span class="p">(),</span> <span class="mi">42</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_fut</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-</div></blockquote>
 <div class="line-block">
-<div class="line">Note:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">HPX_COMPONENT_EXPORT</span></code> is necessary, or the function will not be exported and you’ll get a missing symbol error at link time.</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">HPX_DEFINE_PLAIN_ACTION</span></code> can be inside the namespace or in the global namespace. The function is referenced by its fully qualified name out of the perspective of the macro placement, the action identifier must be a C++ conformant identifier for serialization purposes. (Best stick with numbers, letters, underscores …). If you decide to put the Macro inside the namespace, you must reference the action in step 2 and 3 with the namespace in front of it like <code class="docutils literal notranslate"><span class="pre">app::myFreeFunction_Action</span></code>.</div>
+<div class="line"><strong>HPX_PLAIN_ACTION</strong> <em>defines</em> a free function AND <em>registers</em> it with HPX.</div>
+<div class="line">It could be called from other localities like this:</div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//example action invocation</span>
+<span class="k">auto</span> <span class="n">my_future</span> <span class="o">=</span> <span class="n">HPX</span><span class="o">::</span><span class="n">async</span><span class="o">&lt;</span><span class="n">compute_something_action</span><span class="o">&gt;</span><span class="p">(</span><span class="n">some_locality_id</span><span class="p">,</span> <span class="mi">371</span><span class="p">);</span>
+</pre></div>
 </div>
 </div>
-<p><strong>Step 2:</strong> Function implementation in the shared library source:</p>
-<blockquote>
-<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">HPX_REGISTER_ACTION</span> <span class="p">(</span>  <span class="n">myFreeFunction_Action</span> <span class="p">);</span>
-<span class="k">namespace</span> <span class="n">app</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">myFreeFunction</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// .. doing my thing here, &quot;HelloWorld&quot;, etc. ...</span>
+<div class="section" id="case-2-free-function-in-the-main-program-source-in-custom-namespace">
+<h2>Case 2 : Free function in the main program source in custom namespace<a class="headerlink" href="#case-2-free-function-in-the-main-program-source-in-custom-namespace" title="Permalink to this headline">¶</a></h2>
+<p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_2</span></code></p>
+<dl class="simple">
+<dt>Needed Macros:</dt><dd><p>main.cpp: <strong>HPX_PLAIN_ACTION</strong></p>
+</dd>
+</dl>
+<p>This case works almost the same as case 1. You just have to apply the fully qualified function name to the macro instead. The namespace does NOT appear on the action, because it was defined and registered in the global namespace.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//main program</span>
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx_main.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="c1">// Free function in CUSTOM namespace in main program</span>
+<span class="k">namespace</span> <span class="n">application</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">compute_something</span><span class="p">(</span> <span class="kt">int</span> <span class="n">data</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">data</span> <span class="o">*</span> <span class="mi">42</span><span class="p">;</span>
     <span class="p">}</span>
+<span class="p">};</span> <span class="c1">// namespace application</span>
+<span class="n">HPX_PLAIN_ACTION</span><span class="p">(</span> <span class="n">application</span><span class="o">::</span><span class="n">compute_something</span><span class="p">,</span> <span class="n">compute_something_action</span> <span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[]</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Case 2:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// template parameter: Action name (still without namespace qualifier!)</span>
+    <span class="k">auto</span> <span class="n">m_fut</span> <span class="o">=</span> <span class="n">hpx</span><span class="o">::</span><span class="n">async</span><span class="o">&lt;</span><span class="n">compute_something_action</span><span class="o">&gt;</span><span class="p">(</span> <span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span><span class="p">(</span> <span class="p">),</span> <span class="mi">42</span> <span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_fut</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>HPX_PLAIN_ACTION</strong> <em>defines</em> a free function AND <em>registers</em> it with HPX.</div>
+<div class="line">It could be called from other localities like this:</div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//example action invocation</span>
+<span class="c1">// template parameter: Action name</span>
+<span class="k">auto</span> <span class="n">my_future</span> <span class="o">=</span> <span class="n">HPX</span><span class="o">::</span><span class="n">async</span><span class="o">&lt;</span><span class="n">compute_something_action</span><span class="o">&gt;</span><span class="p">(</span><span class="n">some_node_locality_id</span><span class="p">,</span> <span class="mi">371</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="case-3-free-function-in-main-program-in-custom-namespace-in-separate-header-source-file-pair">
+<h2>Case 3 : Free function in main program in custom namespace in separate header/source file pair<a class="headerlink" href="#case-3-free-function-in-main-program-in-custom-namespace-in-separate-header-source-file-pair" title="Permalink to this headline">¶</a></h2>
+<p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_3</span></code></p>
+<dl>
+<dt>Needed Macros:</dt><dd><div class="line-block">
+<div class="line">header file: <strong>HPX_DEFINE_PLAIN_ACTION</strong>, <strong>HPX_REGISTER_ACTION_DECLARATION</strong></div>
+<div class="line">source file: <strong>HPX_REGISTER_ACTION</strong></div>
+</div>
+</dd>
+</dl>
+<p><strong>Explanation:</strong></p>
+<blockquote>
+<div><p>Now it gets slightly more complex. The Action is defined inside the namespace and thus invoking it requires using the namespace qualifier on it. Definition and registration are now split into two macros and the registration is declared in the header file, while the registration itself happens in the source file. This construction allows using the headerfile in multiple sources without generating duplicate symbol errors at link time.</p>
+</div></blockquote>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// actions.hpp</span>
+<span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">test</span> <span class="p">{</span>
+
+    <span class="c1">// Free function in namespace</span>
+    <span class="kt">int</span> <span class="n">some_function</span><span class="p">(</span> <span class="p">);</span>
+
+    <span class="c1">// Define the action (inside the namespace):</span>
+    <span class="c1">// Parameters: function name, desired action name</span>
+    <span class="n">HPX_DEFINE_PLAIN_ACTION</span><span class="p">(</span> <span class="n">some_function</span><span class="p">,</span> <span class="n">some_function_action</span> <span class="p">);</span>
+
+<span class="p">};</span> <span class="c1">// namespace test</span>
+
+<span class="c1">// Declare the Registering of the  Action (in global namespace)</span>
+<span class="c1">// Parameters: Fully qualified action name, desired action name for serialization</span>
+<span class="c1">// Note: When invoking the action we will still need the fully qualified action name!</span>
+<span class="n">HPX_REGISTER_ACTION_DECLARATION</span><span class="p">(</span> <span class="n">test</span><span class="o">::</span><span class="n">some_function_action</span><span class="p">,</span> <span class="n">some_function_action_serialized</span> <span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// actions.cpp</span>
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;actions.hpp&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">test</span> <span class="p">{</span>
+
+    <span class="c1">// Free function in namespace</span>
+    <span class="kt">int</span> <span class="n">some_function</span><span class="p">(</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">42</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace test</span>
+
+<span class="c1">// (outside namespace)</span>
+<span class="c1">// Parameters: Fully qualified action name, action name for serialization</span>
+<span class="n">HPX_REGISTER_ACTION</span><span class="p">(</span> <span class="n">test</span><span class="o">::</span><span class="n">some_function_action</span><span class="p">,</span> <span class="n">some_function_action_serialized</span> <span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// main.cpp</span>
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx_main.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;actions.hpp&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Case 3:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// template parameter: Fully qualified action name</span>
+    <span class="k">auto</span> <span class="n">m_fut</span> <span class="o">=</span> <span class="n">hpx</span><span class="o">::</span><span class="n">async</span><span class="o">&lt;</span><span class="n">test</span><span class="o">::</span><span class="n">some_function_action</span><span class="o">&gt;</span><span class="p">(</span> <span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span><span class="p">(</span> <span class="p">)</span> <span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_fut</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="case-4-exporting-a-free-function-which-also-lives-in-a-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action">
+<h2>Case 4: Exporting a free function which also lives in a namespace, from a shared library (.dll or .so), and use it as plain  Action<a class="headerlink" href="#case-4-exporting-a-free-function-which-also-lives-in-a-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action" title="Permalink to this headline">¶</a></h2>
+<p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_4</span></code></p>
+<dl>
+<dt>Macros needed:</dt><dd><div class="line-block">
+<div class="line">Library header: <strong>HPX_COMPONENT_EXPORT</strong>, <strong>HPX_DEFINE_PLAIN_ACTION</strong>, <strong>HPX_REGISTER_ACTION_DECLARATION</strong></div>
+<div class="line">Library source file: <strong>HPX_REGISTER_ACTION</strong></div>
+</div>
+</dd>
+</dl>
+<p><strong>Explanation:</strong></p>
+<blockquote>
+<div><p>If you look closely, then you will easily see, that the only difference to case 3 here is, that you need the <strong>HPX_COMPONENT_EXPORT</strong> macro here to get the shared library symbol export. The rest it pretty much identical.</p>
+</div></blockquote>
+<p><strong>Step 1:</strong> Library Header File: Contains Function <em>declaration</em> and action <em>definition</em> along with the <strong>HPX_COMPONENT_EXPORT</strong> macro for symbol export:</p>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// file: actions.hpp</span>
+<span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">test</span> <span class="p">{</span>
+
+    <span class="c1">// Free function in namespace</span>
+    <span class="n">HPX_COMPONENT_EXPORT</span> <span class="kt">int</span> <span class="n">some_function</span><span class="p">(</span> <span class="p">);</span>
+
+    <span class="c1">// Define the action (inside the namespace):</span>
+    <span class="c1">// Parameters: function name, desired action name</span>
+    <span class="n">HPX_DEFINE_PLAIN_ACTION</span><span class="p">(</span> <span class="n">some_function</span><span class="p">,</span> <span class="n">some_function_action</span> <span class="p">);</span>
+
+<span class="p">};</span> <span class="c1">// namespace test</span>
+
+<span class="c1">// Declare the Registering of the  Action (in global namespace)</span>
+<span class="c1">// Parameters: Fully qualified action name, desired action name for serialization</span>
+<span class="c1">// Note: When invoking the action we will still need the fully qualified action name!</span>
+<span class="n">HPX_REGISTER_ACTION_DECLARATION</span><span class="p">(</span> <span class="n">test</span><span class="o">::</span><span class="n">some_function_action</span><span class="p">,</span> <span class="n">some_function_action_serialized</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><strong>Note:</strong></div>
+<div class="line-block">
+<div class="line"><strong>HPX_COMPONENT_EXPORT</strong> is necessary, or the function will not be exported and you’ll get a missing symbol error at link time.</div>
+<div class="line"><strong>Caveat:</strong> The name of the <strong>HPX_COMPONENT_EXPORT</strong> macro is confusing: It works for <em>plain actions</em> as well as for <em>components</em> and their <em>component actions</em>. It simply expands to __declspec(dllimport).</div>
+<div class="line"><strong>HPX_DEFINE_PLAIN_ACTION</strong> can be inside the namespace or in the global namespace. The function is referenced by its fully qualified name out of the perspective of the macro placement, the action identifier must be a C++ conformant identifier for serialization purposes. (Best stick with numbers, letters, underscores …). If you decide to put the Macro inside the namespace, you must reference the action in step 2 and 3 with the namespace in front of it like <code class="docutils literal notranslate"><span class="pre">app::myFreeFunction_Action</span></code>.</div>
+</div>
+</div>
+<p><strong>Step 2:</strong> Library source file: <em>Function implementation</em> and <em>action registration</em>:</p>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// file: actions.cpp</span>
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;actions.hpp&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">test</span> <span class="p">{</span>
+
+    <span class="c1">// Free function in namespace</span>
+    <span class="kt">int</span> <span class="n">some_function</span><span class="p">(</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">42</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace test</span>
+
+<span class="c1">// (outside namespace)</span>
+<span class="c1">// Parameters: Fully qualified action name, action name for serialization</span>
+<span class="n">HPX_REGISTER_ACTION</span><span class="p">(</span> <span class="n">test</span><span class="o">::</span><span class="n">some_function_action</span><span class="p">,</span> <span class="n">some_function_action_serialized</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><strong>Note:</strong></div>
+<div class="line-block">
+<div class="line"><strong>HPX_REGISTER_ACTION</strong> MUST be in the global namespace. It is sufficient to just reference the action name you have chosen in the header here.</div>
+<div class="line">It is NOT necessary to specify the <strong>HPX_COMPONENT_EXPORT</strong> Macro again.</div>
+</div>
+</div>
+<p><strong>Step 3:</strong> Library user: <em>Action invocation</em> in the executable or whoever uses this library:</p>
+<blockquote>
+<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// file: main.cpp</span>
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;hpx/hpx_main.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;actions.hpp&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Case 3:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// template parameter: Fully qualified action name</span>
+    <span class="k">auto</span> <span class="n">m_fut</span> <span class="o">=</span> <span class="n">hpx</span><span class="o">::</span><span class="n">async</span><span class="o">&lt;</span><span class="n">test</span><span class="o">::</span><span class="n">some_function_action</span><span class="o">&gt;</span><span class="p">(</span> <span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span><span class="p">(</span> <span class="p">)</span> <span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_fut</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div></blockquote>
-<div class="line-block">
-<div class="line">Note:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">HPX_REGISTER_ACTION</span></code> <strong>MUST</strong> be in the global namespace. It is sufficient to just reference the action name you have chosen in the header here.</div>
-<div class="line"><br /></div>
-<div class="line">It is NOT necessary to specify the <code class="docutils literal notranslate"><span class="pre">HPX_COMPONENT_EXPORT</span></code> Macro again.</div>
 </div>
-</div>
-<p><strong>Step 3:</strong> Action invocation in the executable or whoever uses this library:</p>
-<blockquote>
-<div><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// of course, you need to be inside your hpx_main scope somehow.</span>
-<span class="c1">// This example &quot;fires and forgets&quot; the action on the local console locality.</span>
-<span class="c1">// Both lines are equivalent:</span>
-<span class="n">hpx</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span> <span class="n">myFreeFunction_Action</span><span class="p">(),</span> <span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span><span class="p">()</span> <span class="p">);</span>
-<span class="n">hpx</span><span class="o">::</span><span class="n">apply</span> <span class="o">&lt;</span><span class="n">myFreeFunction_Action</span><span class="o">&gt;</span> <span class="p">(</span> <span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span><span class="p">()</span> <span class="p">);</span>
-</pre></div>
-</div>
-</div></blockquote>
 </div>
 
 

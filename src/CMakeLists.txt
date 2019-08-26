@@ -1,3 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 
-add_subdirectory(include_test_1)
+add_subdirectory(action_and_component_macros/case_1)
+add_subdirectory(action_and_component_macros/case_2)
+add_subdirectory(action_and_component_macros/case_3)
+add_subdirectory(action_and_component_macros/case_4)
