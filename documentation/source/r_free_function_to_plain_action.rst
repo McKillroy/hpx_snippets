@@ -11,7 +11,7 @@ Use Case Variables:
   2. Free Function location and linkage
       * In main program source
       * In a separate header/source file pair
-      * Inside a static or shared library
+      * Inside a static or shared library 
   
   3. Free function return type
       * returning a value 
@@ -25,7 +25,7 @@ Case 1 : Free function in the main program source in global namespace
 Example sourcecode in the repository is at ``/src/action_and_component_macros/case_1``
 
 Needed Macros:  
-    main.cpp: `HPX_PLAIN_ACTION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L210>`_
+    main.cpp: `HPX_PLAIN_ACTION`_.
 
 This is the most simple case, but also limited. It would not work for a header file because it would create double definitions when included into several source files.
 
@@ -57,7 +57,7 @@ Example:
         return 0;
     }
 
-| `HPX_PLAIN_ACTION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L210>`_ *defines* a free function AND *registers* it with HPX. 
+| `HPX_PLAIN_ACTION`_ *defines* a free function AND *registers* it with HPX. 
 | It could be called from other localities like this:
 
 .. code-block:: cpp
@@ -72,7 +72,7 @@ Case 2 : Free function in the main program source in custom namespace
 Example sourcecode in the repository is at ``/src/action_and_component_macros/case_2``
 
 Needed Macros:
-  main.cpp: `HPX_PLAIN_ACTION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L210>`_
+  main.cpp: `HPX_PLAIN_ACTION`_
 
 This case works almost the same as case 1. You just have to apply the fully qualified function name to the macro instead. The namespace does NOT appear on the action, because it was defined and registered in the global namespace.
 
@@ -106,7 +106,7 @@ This case works almost the same as case 1. You just have to apply the fully qual
         return 0;
     }
 
-| `HPX_PLAIN_ACTION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L210>`_ *defines* a free function AND *registers* it with HPX. 
+| `HPX_PLAIN_ACTION`_ *defines* a free function AND *registers* it with HPX. 
 | It could be called from other localities like this:
 
 .. code-block:: cpp
@@ -124,8 +124,8 @@ Case 3 : Free function in main program in custom namespace in separate header/so
 Example sourcecode in the repository is at ``/src/action_and_component_macros/case_3``
 
 Needed Macros:  
-  | header file: `HPX_DEFINE_PLAIN_ACTION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L121>`_, `HPX_REGISTER_ACTION_DECLARATION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/basic_action.hpp#L867>`_
-  | source file: `HPX_REGISTER_ACTION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/basic_action.hpp#L923>`_
+  | header file: `HPX_DEFINE_PLAIN_ACTION`_, `HPX_REGISTER_ACTION_DECLARATION`_
+  | source file: `HPX_REGISTER_ACTION`_
 
 **Explanation:**
 
@@ -207,15 +207,15 @@ Case 4: Exporting a free function which also lives in a namespace, from a shared
 Example sourcecode in the repository is at ``/src/action_and_component_macros/case_4``
 
 Macros needed:
-  | Library header: `HPX_COMPONENT_EXPORT <https://github.com/STEllAR-GROUP/hpx/blob/master/libs/config/include/hpx/config/export_definitions.hpp#L70>`_, `HPX_DEFINE_PLAIN_ACTION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L121>`_, `HPX_REGISTER_ACTION_DECLARATION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/basic_action.hpp#L867>`_
-  | Library source file: `HPX_REGISTER_ACTION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/basic_action.hpp#L923>`_
+  | Library header: `HPX_COMPONENT_EXPORT`_, `HPX_DEFINE_PLAIN_ACTION`_, `HPX_REGISTER_ACTION_DECLARATION`_
+  | Library source file: `HPX_REGISTER_ACTION`_
 
 **Explanation:** 
 
   If you look closely, then you will easily see, that the only difference to case 3 here is, that you need the **HPX_COMPONENT_EXPORT** macro here to get the shared library symbol export. The rest it pretty much identical.
 
 
-**Step 1:** Library Header File: Contains Function *declaration* and action *definition* along with the `HPX_COMPONENT_EXPORT <https://github.com/STEllAR-GROUP/hpx/blob/master/libs/config/include/hpx/config/export_definitions.hpp#L70>`_ macro for symbol export:
+**Step 1:** Library Header File: Contains Function *declaration* and action *definition* along with the `HPX_COMPONENT_EXPORT`_ macro for symbol export:
 
     .. code-block:: cpp
 
@@ -242,9 +242,9 @@ Macros needed:
 
 
 | **Note:** 
-|   `HPX_COMPONENT_EXPORT <https://github.com/STEllAR-GROUP/hpx/blob/master/libs/config/include/hpx/config/export_definitions.hpp#L70>`_ is necessary, or the function will not be exported and you'll get a missing symbol error at link time.
-|   **Caveat:** The name of the `HPX_COMPONENT_EXPORT <https://github.com/STEllAR-GROUP/hpx/blob/master/libs/config/include/hpx/config/export_definitions.hpp#L70>`_ macro is confusing: It works for *plain actions* as well as for *components* and their *component actions*. It simply expands to __declspec(dllimport).
-|   `HPX_DEFINE_PLAIN_ACTION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/plain_action.hpp#L121>`_ can be inside the namespace or in the global namespace. The function is referenced by its fully qualified name out of the perspective of the macro placement, the action identifier must be a C++ conformant identifier for serialization purposes. (Best stick with numbers, letters, underscores ...). If you decide to put the Macro inside the namespace, you must reference the action in step 2 and 3 with the namespace in front of it like ``app::myFreeFunction_Action``.
+|   `HPX_COMPONENT_EXPORT`_ is necessary, or the function will not be exported and you'll get a missing symbol error at link time.
+|   **Caveat:** The name of the `HPX_COMPONENT_EXPORT`_ macro is confusing: It works for *plain actions* as well as for *components* and their *component actions*. It simply expands to __declspec(dllimport).
+|   `HPX_DEFINE_PLAIN_ACTION`_ can be inside the namespace or in the global namespace. The function is referenced by its fully qualified name out of the perspective of the macro placement, the action identifier must be a C++ conformant identifier for serialization purposes. (Best stick with numbers, letters, underscores ...). If you decide to put the Macro inside the namespace, you must reference the action in step 2 and 3 with the namespace in front of it like ``app::myFreeFunction_Action``.
 
 
 **Step 2:** Library source file: *Function implementation* and *action registration*:
@@ -271,8 +271,8 @@ Macros needed:
 
 
 | **Note:**
-|   `HPX_REGISTER_ACTION <https://github.com/STEllAR-GROUP/hpx/blob/master/hpx/runtime/actions/basic_action.hpp#L923>`_ MUST be in the global namespace. It is sufficient to just reference the action name you have chosen in the header here.
-|   It is NOT necessary to specify the `HPX_COMPONENT_EXPORT <https://github.com/STEllAR-GROUP/hpx/blob/master/libs/config/include/hpx/config/export_definitions.hpp#L70>`_ Macro again.
+|   `HPX_REGISTER_ACTION`_ MUST be in the global namespace. It is sufficient to just reference the action name you have chosen in the header here.
+|   It is NOT necessary to specify the `HPX_COMPONENT_EXPORT`_ Macro again.
 
 
 **Step 3:** Library user: *Action invocation* in the executable or whoever uses this library:
@@ -300,4 +300,8 @@ Macros needed:
        }
 
 
-
+.. _HPX_COMPONENT_EXPORT: https://stellar-group.github.io/hpx/docs/sphinx/latest/singlehtml/index.html#c.HPX_COMPONENT_EXPORT
+.. _HPX_DEFINE_PLAIN_ACTION: https://stellar-group.github.io/hpx/docs/sphinx/latest/singlehtml/index.html#c.HPX_DEFINE_PLAIN_ACTION
+.. _HPX_PLAIN_ACTION: https://stellar-group.github.io/hpx/docs/sphinx/latest/singlehtml/index.html#c.HPX_PLAIN_ACTION
+.. _HPX_REGISTER_ACTION_DECLARATION: https://stellar-group.github.io/hpx/docs/sphinx/latest/singlehtml/index.html#c.HPX_REGISTER_ACTION_DECLARATION
+.. _HPX_REGISTER_ACTION: https://stellar-group.github.io/hpx/docs/sphinx/latest/singlehtml/index.html#c.HPX_REGISTER_ACTION
