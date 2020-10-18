@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to build a custom vcpkg HPX port for your project &mdash; HPX Cookbook 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> HPX Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#part-i-moore-s-law-and-the-free-lunch-is-over-problem">Part I : Moore’s Law and “The Free Lunch is Over” problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#a-concurrency">A. Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#b-parallelism">B. Parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#c-distributed-computing">C. Distributed Computing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#scalability">Scalability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#amdahls-law">Amdahls Law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#the-universal-scalability-law-usl">The Universal Scalability Law “USL”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#consequences-of-the-usl-for-writing-your-application">Consequences of the USL for writing your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#introduction-to-hpx">Introduction to HPX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#parallelization">Parallelization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#concurrency">Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#distribution">Distribution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Concepts needed to understand and leverage HPX</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#general-programming-concepts">General Programming Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#c-concepts">C++ Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#hpx-concepts">HPX Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_parallel_execution.html">Section 6: HPX Parallel Task Execution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#calls-into-the-runtime">Calls into the runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#executors-and-execution-policies">Executors and Execution Policies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_concurrency_management.html">Section 7: HPX Concurrency Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#futures">Futures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#synchronous-and-asynchronous-calls">Synchronous and Asynchronous Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_distributed_computing.html">Section 8: HPX Distributed Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#locality">Locality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#component">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#action">Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#hpx-serialization-and-transport">HPX Serialization and Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 42 : A collection of HPX Recipes, HowTos and Drafts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-action-and-component-macros">HPX Action and Component Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-other">HPX Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#drafts">Drafts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#general-c">General C++</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">HPX Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>How to build a custom vcpkg HPX port for your project</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/vcpkg_custom_hpx_port.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-build-a-custom-vcpkg-hpx-port-for-your-project">
+<h1>How to build a custom vcpkg HPX port for your project<a class="headerlink" href="#how-to-build-a-custom-vcpkg-hpx-port-for-your-project" title="Permalink to this headline">¶</a></h1>
+<p>vcpkg ( Git Repo: <a class="reference external" href="https://github.com/Microsoft/vcpkg">https://github.com/Microsoft/vcpkg</a>, Docs: <a class="reference external" href="https://vcpkg.readthedocs.io">https://vcpkg.readthedocs.io</a> ) is an open source  package manager by Microsoft. It provides so called “ports” of open source libraries which allow building them from source using the port definition. There also is a port for hpx which would be installed like <code class="docutils literal notranslate"><span class="pre">./vcpkg</span> <span class="pre">install</span> <span class="pre">hpx:x64-windows</span></code> on Windows as an example.</p>
+<p>vcpkg ports can have so called features. e.g. the lua scripting language can be compiled as c++ which would give it exceptions instead of longjumps for error handling.``./vcpkg install lua[cpp]:x64-windows`` uses this feature.</p>
+<p>HPX has many many variables which can be used to modify how it is built:</p>
+<p><a class="reference external" href="https://hpx-docs.stellar-group.org/latest/html/manual/building_hpx.html?highlight=hpx%20allocator#cmake-variables">https://hpx-docs.stellar-group.org/latest/html/manual/building_hpx.html?highlight=hpx%20allocator#cmake-variables</a></p>
+<p>It is not really viable to try and force all this inbto a single port with a gazillion of features. Instead it is easier to learn how to use a custom port to achieve the results you want.</p>
+<p>At the time of this writing (October 2020) the hpx port is pinned to version 1.5.1 of HPX and it consists of two files:</p>
+<p><code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> and <code class="docutils literal notranslate"><span class="pre">portfile.cmake</span></code></p>
+<p>You can find them in <code class="docutils literal notranslate"><span class="pre">&lt;vcpkg_root&gt;/ports/hpx</span></code></p>
+<p>The goal in this example is to replace the default system allocator in hpx with mimalloc. To achieve this we have just to do two things (copy the <code class="docutils literal notranslate"><span class="pre">&lt;vcpkg&gt;/ports/hpx</span></code> directory to another location and work on that copy, e.g..
+<code class="docutils literal notranslate"><span class="pre">&lt;my_project&gt;/my_vcpkg_ports/hpx</span></code> ):</p>
+<ol class="arabic simple">
+<li><p>Add mimalloc as a dependency to the CONTROL file (mimalloc can be built with vcpkg):</p></li>
+</ol>
+<div class="literal-block-wrapper docutils container" id="control-file">
+<div class="code-block-caption"><span class="caption-text">file: CONTROL</span><a class="headerlink" href="#control-file" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Source: hpx
+Version: 1.5.1
+Build-Depends: mimalloc, hwloc, boost-accumulators, boost-algorithm, boost-asio, boost-bimap, boost-config, boost-context, boost-dynamic-bitset, boost-exception, boost-filesystem, boost-iostreams, boost-lockfree, boost-program-options, boost-range, boost-spirit, boost-system, boost-throw-exception, boost-variant, boost-winapi
+Homepage: https://github.com/STEllAR-GROUP/hpx
+Description: The C++ Standards Library for Concurrency and Parallelism
+    HPX is a C++ Standards Library for Concurrency and Parallelism. It implements all of the corresponding facilities as defined by the C++ Standard. Additionally, in HPX we implement functionalities proposed as part of the ongoing C++ standardization process. We also extend the C++ Standard APIs to the distributed case.
+</pre></div>
+</div>
+</div>
+<p>So - I just added mimalloc to the <code class="docutils literal notranslate"><span class="pre">Build-Depends</span></code> field.</p>
+<ol class="arabic simple" start="2">
+<li><p>We also have to set the cmake variable <code class="docutils literal notranslate"><span class="pre">HPX_WITH_MALLOC</span></code> to <code class="docutils literal notranslate"><span class="pre">mimalloc</span></code>. This can be done in the following section of the portfile.cmake:</p></li>
+</ol>
+<div class="literal-block-wrapper docutils container" id="portfile-cmake-snippet">
+<div class="code-block-caption"><span class="caption-text">file: portfile.cmake (snippet)</span><a class="headerlink" href="#portfile-cmake-snippet" title="Permalink to this code">¶</a></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">vcpkg_configure_cmake</span><span class="p">(</span>
+    <span class="s">SOURCE_PATH</span> <span class="o">${</span><span class="nv">SOURCE_PATH</span><span class="o">}</span>
+    <span class="s">PREFER_NINJA</span>
+    <span class="s">OPTIONS</span>
+        <span class="s2">&quot;-DBOOST_ROOT=${CURRENT_INSTALLED_DIR}/share/boost&quot;</span>
+        <span class="s2">&quot;-DHWLOC_ROOT=${CURRENT_INSTALLED_DIR}/share/hwloc&quot;</span>
+        <span class="s">-DHPX_WITH_VCPKG=ON</span>
+        <span class="s">-DHPX_WITH_TESTS=OFF</span>
+        <span class="s">-DHPX_WITH_EXAMPLES=OFF</span>
+        <span class="s">-DHPX_WITH_TOOLS=OFF</span>
+        <span class="s">-DHPX_WITH_RUNTIME=OFF</span>
+        <span class="s">-DHPX_WITH_MALLOC=mimalloc</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>And that’s basically it.
+Now we have to make sure we have no vanilla hpx installed with vcpkg.</p>
+<p><code class="docutils literal notranslate"><span class="pre">./vcpkg</span> <span class="pre">list</span></code></p>
+<p>gives us a list of installed packages - remove any lingering hpx install:</p>
+<p><code class="docutils literal notranslate"><span class="pre">./vcpkg</span> <span class="pre">remove</span> <span class="pre">hpx:x64-windows</span></code></p>
+<p>And now we’d reinstall using the directory with our modified port.</p>
+<p><code class="docutils literal notranslate"><span class="pre">./vcpkg</span> <span class="pre">install</span> <span class="pre">hpx:x64-windows</span> <span class="pre">--overlay-ports=&lt;my_project&gt;/my_vcpkg_ports</span></code></p>
+<p>The overlaying process is also described in the vcpkg documentation here:</p>
+<p><a class="reference external" href="https://vcpkg.readthedocs.io/en/latest/specifications/ports-overlay/">https://vcpkg.readthedocs.io/en/latest/specifications/ports-overlay/</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019, Yorlik, https://github.com/McKillroy/hpx_snippets
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

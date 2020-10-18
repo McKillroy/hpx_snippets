@@ -4,3 +4,5 @@ add_subdirectory(action_and_component_macros/case_1)
 add_subdirectory(action_and_component_macros/case_2)
 add_subdirectory(action_and_component_macros/case_3)
 add_subdirectory(action_and_component_macros/case_4)
+add_subdirectory(action_and_component_macros/case_5)
+

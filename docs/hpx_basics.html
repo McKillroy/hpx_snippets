@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,31 +11,33 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Section 5: Helpful concepts to fully understand and leverage HPX" href="concepts.html" />
+    <link rel="next" title="Section 5: Concepts needed to understand and leverage HPX" href="concepts.html" />
     <link rel="prev" title="Section 3 : Scalability, Amdahls Law and the USL" href="scalability.html" /> 
 </head>
 
@@ -47,11 +48,11 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
           
 
           
-            <a href="index.html" class="icon icon-home"> HPX Cookbook
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> HPX Cookbook
           
 
           
@@ -74,6 +75,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -84,21 +86,71 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Section 4 : HPX Basics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#part-i-moore-s-law-and-the-free-lunch-is-over-problem">Part I : Moore’s Law and “The Free Lunch is Over” problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#a-concurrency">A. Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#b-parallelism">B. Parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#c-distributed-computing">C. Distributed Computing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Helpful concepts to fully understand and leverage HPX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 6 : A collection of HPX Recipes, HowTos and Drafts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#scalability">Scalability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#amdahls-law">Amdahls Law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#the-universal-scalability-law-usl">The Universal Scalability Law “USL”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#consequences-of-the-usl-for-writing-your-application">Consequences of the USL for writing your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Section 4 : HPX Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-hpx">Introduction to HPX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parallelization">Parallelization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concurrency">Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#distribution">Distribution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Concepts needed to understand and leverage HPX</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#general-programming-concepts">General Programming Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#c-concepts">C++ Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#hpx-concepts">HPX Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_parallel_execution.html">Section 6: HPX Parallel Task Execution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#calls-into-the-runtime">Calls into the runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#executors-and-execution-policies">Executors and Execution Policies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_concurrency_management.html">Section 7: HPX Concurrency Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#futures">Futures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#synchronous-and-asynchronous-calls">Synchronous and Asynchronous Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_distributed_computing.html">Section 8: HPX Distributed Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#locality">Locality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#component">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#action">Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#hpx-serialization-and-transport">HPX Serialization and Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 42 : A collection of HPX Recipes, HowTos and Drafts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-action-and-component-macros">HPX Action and Component Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-other">HPX Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#drafts">Drafts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#general-c">General C++</a></li>
+</ul>
+</li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -137,7 +189,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Section 4 : HPX Basics</li>
     
@@ -159,7 +211,28 @@
            <div itemprop="articleBody">
             
   <div class="section" id="section-4-hpx-basics">
-<h1>Section 4 : HPX Basics<a class="headerlink" href="#section-4-hpx-basics" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id2">Section 4 : HPX Basics</a><a class="headerlink" href="#section-4-hpx-basics" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#section-4-hpx-basics" id="id2">Section 4 : HPX Basics</a></p>
+<ul>
+<li><p><a class="reference internal" href="#introduction-to-hpx" id="id3">Introduction to HPX</a></p></li>
+<li><p><a class="reference internal" href="#what-can-hpx-do-for-you" id="id4">What can HPX do for you?</a></p></li>
+<li><p><a class="reference internal" href="#what-can-hpx-not-do-for-you" id="id5">What can HPX NOT do for you</a></p></li>
+<li><p><a class="reference internal" href="#how-does-it-work" id="id6">How does it work?</a></p>
+<ul>
+<li><p><a class="reference internal" href="#parallelization" id="id7">Parallelization</a></p></li>
+<li><p><a class="reference internal" href="#concurrency" id="id8">Concurrency</a></p></li>
+<li><p><a class="reference internal" href="#distribution" id="id9">Distribution</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction-to-hpx">
+<h2><a class="toc-backref" href="#id3">Introduction to HPX</a><a class="headerlink" href="#introduction-to-hpx" title="Permalink to this headline">¶</a></h2>
 <p>HPX is a standards conformant runtime written in C++ which can help you to parallelize your application with minimal overhead.</p>
 <p>It specifically targets the problems of</p>
 <dl class="simple">
@@ -178,8 +251,9 @@
 <dt>ParalleX</dt><dd><p>Citation and .pdf download Links: <a class="reference external" href="https://www.researchgate.net/publication/220953286_ParalleX_A_Study_of_A_New_Parallel_Computation_Model">ParalleX: A Study of A New Parallel Computation Model</a></p>
 </dd>
 </dl>
+</div>
 <div class="section" id="what-can-hpx-do-for-you">
-<h2>What can HPX do for you?<a class="headerlink" href="#what-can-hpx-do-for-you" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">What can HPX do for you?</a><a class="headerlink" href="#what-can-hpx-do-for-you" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Help parallelizing your application and increasing CPU and node Utilization with a</p></li>
 <li><p>Standards conformant interface</p></li>
@@ -188,11 +262,67 @@
 </ul>
 </div>
 <div class="section" id="what-can-hpx-not-do-for-you">
-<h2>What can HPX NOT do for you<a class="headerlink" href="#what-can-hpx-not-do-for-you" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">What can HPX NOT do for you</a><a class="headerlink" href="#what-can-hpx-not-do-for-you" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Automagically parallelize your code and make a badly written application fast.</p></li>
 <li><p>Remove all danger of race conditions</p></li>
 </ul>
+</div>
+<div class="section" id="how-does-it-work">
+<h2><a class="toc-backref" href="#id6">How does it work?</a><a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h2>
+<p>HPX provides a runtime environment to allow running your programs in parallel - be it locally on the cores of your desktop computer or on a datacenter with potentially thousands of remote machines, processors and cores.</p>
+<p>To achieve that, HPX provides a set of technologies you can use to parallelize your program with as little overhead as possible. And since with parallelization comes concurrency, HPX also provides a model to manage concurrency in your application. And with distributed applications comes networking, so HPX provides that too.</p>
+<p>The purpose of following sections is, to provide you with an introduction to the various techniques used in HPX enabled applications to achieve the goals of parallelization, concurrency management and transport in a distributed environment.</p>
+<p>When an HPX application or cluster is starting (Description of the bootstrap process) …</p>
+<p>Once the application or the cluster of nodes with your aplication is up an running and the nodes are connected it is ready to run the workload.</p>
+<p>HPX is strongly oriented to be compliant with existing and upcoming C++ standards like parallel algorithms, threading, concurrency TS and others.</p>
+<div class="section" id="parallelization">
+<h3><a class="toc-backref" href="#id7">Parallelization</a><a class="headerlink" href="#parallelization" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Parallelization in HPX is achieved by submitting tasks to the HPX runtime.</p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Async task example</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span> <span class="c1">// prepare data</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">the_question</span> <span class="o">=</span> <span class="s">&quot;What is the meaning of life, the universe and everything?&quot;</span><span class="p">;</span>
+ <span class="c1">// submit task to HPX - returns immediately, while the task is running in the background</span>
+ <span class="k">auto</span> <span class="n">future_result</span> <span class="o">=</span> <span class="n">hpx</span><span class="o">::</span><span class="n">async</span><span class="p">(</span> <span class="c1">// param 1: The callable - here a lambda</span>
+     <span class="p">[](</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">question</span><span class="p">)</span> <span class="p">{</span> <span class="n">troll_user_for_10e6_years</span><span class="p">(</span><span class="n">question</span><span class="p">);</span> <span class="k">return</span> <span class="s">&quot;The answer is 42.&quot;</span><span class="p">;</span> <span class="p">},</span>
+     <span class="n">hpx</span><span class="o">::</span><span class="n">find_here</span><span class="p">(),</span>            <span class="c1">// param 2: locality - here the local machine</span>
+     <span class="n">the_question</span>                 <span class="c1">// param(s): callable arg(s) - here a single string</span>
+ <span class="p">);</span>
+ <span class="n">future_result</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span>                                 <span class="c1">// this will block until the future is ready.</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">finally_the_answer</span> <span class="o">=</span> <span class="n">future_result</span><span class="p">.</span><span class="n">get</span><span class="p">();</span> <span class="c1">// ready, because we waited for it</span>
+ <span class="n">hpx</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">finally_the_answer</span> <span class="o">&lt;&lt;</span> <span class="n">hpx</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<ul>
+<li><p>This can be done synchronously ( = “blocking” - you wait for the task to finish) or asynchronously (the call returns immediately and you receive a future to the results which you can use, once they are available) like in the “Async task example” above.</p></li>
+<li><p>A task can be a conventional callable, like a function, a functor or a lambda (for local execution) or a so called action, which is a serializable representation of a callable that can be sent over the transport to be run on a remote node (a so-called “locality”).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Submitting the task returns a future you can pass around, wait for or dump.</p></li>
+<li><p>The example above can run only locally, because the callable is a lambda and not an action. More on actions, and how they are created from callables <a class="reference internal" href="macros_for_components_and_actions.html"><span class="doc">HPX Macros for Components and Actions</span></a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>A task is a small unit of work. You do not always have to create your tasks manually. E.g. when using parallel algorithms or parallel for loops, HPX is chopping the bigger task for you into pieces which are then separately submitted to the runtime and which return a combined future, which is ready, when all the sub-tasks are completed.</p>
+</div>
+<div class="section" id="concurrency">
+<h3><a class="toc-backref" href="#id8">Concurrency</a><a class="headerlink" href="#concurrency" title="Permalink to this headline">¶</a></h3>
+<p>The main construct to manage concurrency in HPX is the future. “Futurize everything” is a proverb used within the HPX community to describe that. Using futures does not protect you from all potential concurrency issues, but it allows you to manage them.</p>
+</div>
+<div class="section" id="distribution">
+<h3><a class="toc-backref" href="#id9">Distribution</a><a class="headerlink" href="#distribution" title="Permalink to this headline">¶</a></h3>
+<p>Running your application as a parallelized AND distributed app is not much different than running it locally on a pool of HPX worker threads. The only difference is, that your threads now run locally AND remotely on the nodes of your cluster. Therefore, when submitting your task, you also need to provide the so called localities your application is allowed to run on.</p>
+<ul class="simple">
+<li><p>Where are the tasks created?</p></li>
+<li><p>How is the distribution of tasks coordinated?</p></li>
+<li><p>What about distributed containers?</p></li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -204,7 +334,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="concepts.html" class="btn btn-neutral float-right" title="Section 5: Helpful concepts to fully understand and leverage HPX" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="concepts.html" class="btn btn-neutral float-right" title="Section 5: Concepts needed to understand and leverage HPX" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="scalability.html" class="btn btn-neutral float-left" title="Section 3 : Scalability, Amdahls Law and the USL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -216,11 +346,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Yorlik, https://github.com/McKillroy/hpx_snippets
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -231,7 +369,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

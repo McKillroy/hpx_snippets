@@ -2,10 +2,10 @@
 
 Turning a struct or class into a component and use it's methods
 ==================================================================
-  
+
 There are two fundamental ways to do this:
   - Do it the basic way
-  - Wrap the client side of things into a wrapper object to have typesafety and ease of mind
+  - Additionallly wrap the client side of things into a wrapper object to have typesafety and ease of mind
     
 In this tutorial I'm doing it the dumb way without a client object, because that needs to be done anyways and such is always the first thing to do.
 
@@ -17,23 +17,31 @@ In this tutorial I'm doing it the dumb way without a client object, because that
        // Component Library Header
        // myObj.hpp
        /* Boilerplate: Includes, etc ... */
+
        namespace app {
+
          struct HPX_EXPORT_COMPONENT myObj : PUBLIC hpx::components::component_base<myObj> {
+           
            string sayHello();
            // Variant 1: Let the macro chose a default name for the action ("sayHello_action" in this case)
            HPX_DEFINE_COMPONENT_ACTION(myObj, sayHello); 
+           
            string sayGoodBye(string sender);
            // Variant 2: Chose a custom name for the action ("sayGoodBye_a" in this case)
            HPX_DEFINE_COMPONENT_ACTION(myObj, sayGoodBye, sayGoodBye_a); // chosing a custom action name
+           
            // We are not exposing this method as an action;
            void setName(string name);
+           
            private:
            string name_ = "Nobody";
+         
          };
          // Variant A: Inside the namespace: 
          // In this case the action will be known globally as app::myobj_component_sayHello_action
          HPX_REGISTER_ACTION_DECLARATION ( myObj::sayHello_action, myobj_component_sayHello_action );
        };
+       
        // Variant B: Outside the namespace
        HPX_REGISTER_ACTION_DECLARATION ( app::myObj::sayGoodBye_a, myobj_component_sayGoodBye_a );
 

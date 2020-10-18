@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,27 +11,29 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -45,11 +46,11 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
           
 
           
-            <a href="index.html" class="icon icon-home"> HPX Cookbook
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> HPX Cookbook
           
 
           
@@ -72,6 +73,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -82,17 +84,71 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Helpful concepts to fully understand and leverage HPX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 6 : A collection of HPX Recipes, HowTos and Drafts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#part-i-moore-s-law-and-the-free-lunch-is-over-problem">Part I : Moore’s Law and “The Free Lunch is Over” problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#a-concurrency">A. Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#b-parallelism">B. Parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#c-distributed-computing">C. Distributed Computing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#scalability">Scalability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#amdahls-law">Amdahls Law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#the-universal-scalability-law-usl">The Universal Scalability Law “USL”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#consequences-of-the-usl-for-writing-your-application">Consequences of the USL for writing your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#introduction-to-hpx">Introduction to HPX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#parallelization">Parallelization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#concurrency">Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#distribution">Distribution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Concepts needed to understand and leverage HPX</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#general-programming-concepts">General Programming Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#c-concepts">C++ Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#hpx-concepts">HPX Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_parallel_execution.html">Section 6: HPX Parallel Task Execution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#calls-into-the-runtime">Calls into the runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#executors-and-execution-policies">Executors and Execution Policies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_concurrency_management.html">Section 7: HPX Concurrency Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#futures">Futures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#synchronous-and-asynchronous-calls">Synchronous and Asynchronous Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_distributed_computing.html">Section 8: HPX Distributed Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#locality">Locality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#component">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#action">Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#hpx-serialization-and-transport">HPX Serialization and Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 42 : A collection of HPX Recipes, HowTos and Drafts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-action-and-component-macros">HPX Action and Component Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-other">HPX Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#drafts">Drafts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#general-c">General C++</a></li>
+</ul>
+</li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -131,7 +187,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Get Component Pointer from id_type</li>
     
@@ -197,11 +253,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Yorlik, https://github.com/McKillroy/hpx_snippets
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -212,7 +276,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

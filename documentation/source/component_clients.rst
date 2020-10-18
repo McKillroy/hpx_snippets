@@ -8,9 +8,9 @@ From the hpx documentation section `"terminology" <https://stellar-group.github.
 
 .. code-block:: text
 
-   " A component is a C++ object which can be accessed remotely. 
-   A component can also contain member functions which can be invoked remotely. 
-   These are referred to as component actions." 
+   "A component is a C++ object which can be accessed remotely. 
+    A component can also contain member functions which can be invoked remotely. 
+    These are referred to as component actions." 
 
 **The component containing the functionality is called the "server".** Whenever you create an HPX component with the well known CRTP pattern, like:
 

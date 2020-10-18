@@ -2,17 +2,23 @@
 Section 2 : Introduction to the Problem
 =======================================
 
+.. contents::
+
 Part I : Moore's Law and "The Free Lunch is Over" problem
 --------------------------------------------------------------
 
-Read this article by Herb Sutter in Dr.Dobbs Journal: 
+Read this article by Herb Sutter, originally published in Dr.Dobbs Journal: 
 
 `The Free Lunch Is Over: A Fundamental Turn Toward Concurrency in Software <http://www.gotw.ca/publications/concurrency-ddj.htm>`_
 
+He made a follow-up: `Welcome to the jungle <https://herbsutter.com/welcome-to-the-jungle/>`_
+
 
 Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing
----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
+
+-----------------
 A. Concurrency
 -----------------
 
@@ -27,11 +33,13 @@ Corollary
 Race Conditions
   From `Wikipedia <https://en.wikipedia.org/wiki/Race_condition>`_: *"A race condition or race hazard is the condition of an electronics, software, or other system where the system's substantive behavior is dependent on the sequence or timing of other uncontrollable events. It becomes a bug when one or more of the possible behaviors is undesirable."* 
 
+---------------
 B. Parallelism
 ---------------
 
   Parallelism is NOT concurrency! E.g. if there is read-only access to data, no concurrecy is happening but there might be parallel reads. This implies that immutable state can help avoiding concurrency problems where applicable.
 
+--------------------------
 C. Distributed Computing
 --------------------------
 Essentially distributed computing is parallel computing with some bonus problems:

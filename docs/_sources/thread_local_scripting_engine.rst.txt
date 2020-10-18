@@ -7,9 +7,10 @@ If you have objects you want to use frequently from several HPX tasks, like a sc
 
 This could be done by leveraging the following
 
-C++ concepts: 
-    * Function Local Static Variables: Create once and use for the entire runtime of the application
-    * Thread Local Storage: Have that object only available in a specific OS worker thread to tame possible concurrency issues.
+**C++ concepts:**
+
+    * **Function Local Static Variables:** Create once and use for the entire runtime of the application
+    * **Thread Local Storage:** Have that object only available in a specific OS worker thread to tame possible concurrency issues.
     * Combine the above and win!
 
 

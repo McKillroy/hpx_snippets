@@ -1,38 +1,39 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>How to make Plain Actions from Free Functions &mdash; HPX Cookbook 0.1 documentation</title>
+  <title>How to make Plain Actions from Static Member or Free Functions &mdash; HPX Cookbook 0.1 documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -45,11 +46,11 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
           
 
           
-            <a href="index.html" class="icon icon-home"> HPX Cookbook
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> HPX Cookbook
           
 
           
@@ -72,6 +73,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -82,17 +84,71 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Helpful concepts to fully understand and leverage HPX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 6 : A collection of HPX Recipes, HowTos and Drafts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#part-i-moore-s-law-and-the-free-lunch-is-over-problem">Part I : Moore’s Law and “The Free Lunch is Over” problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#a-concurrency">A. Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#b-parallelism">B. Parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#c-distributed-computing">C. Distributed Computing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#scalability">Scalability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#amdahls-law">Amdahls Law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#the-universal-scalability-law-usl">The Universal Scalability Law “USL”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#consequences-of-the-usl-for-writing-your-application">Consequences of the USL for writing your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#introduction-to-hpx">Introduction to HPX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#parallelization">Parallelization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#concurrency">Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#distribution">Distribution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Concepts needed to understand and leverage HPX</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#general-programming-concepts">General Programming Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#c-concepts">C++ Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#hpx-concepts">HPX Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_parallel_execution.html">Section 6: HPX Parallel Task Execution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#calls-into-the-runtime">Calls into the runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#executors-and-execution-policies">Executors and Execution Policies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_concurrency_management.html">Section 7: HPX Concurrency Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#futures">Futures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#synchronous-and-asynchronous-calls">Synchronous and Asynchronous Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_distributed_computing.html">Section 8: HPX Distributed Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#locality">Locality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#component">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#action">Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#hpx-serialization-and-transport">HPX Serialization and Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 42 : A collection of HPX Recipes, HowTos and Drafts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-action-and-component-macros">HPX Action and Component Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-other">HPX Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#drafts">Drafts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#general-c">General C++</a></li>
+</ul>
+</li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -131,9 +187,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>How to make Plain Actions from Free Functions</li>
+      <li>How to make Plain Actions from Static Member or Free Functions</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -152,12 +208,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="how-to-make-plain-actions-from-free-functions">
-<h1>How to make Plain Actions from Free Functions<a class="headerlink" href="#how-to-make-plain-actions-from-free-functions" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="how-to-make-plain-actions-from-static-member-or-free-functions">
+<h1><a class="toc-backref" href="#id1">How to make Plain Actions from Static Member or Free Functions</a><a class="headerlink" href="#how-to-make-plain-actions-from-static-member-or-free-functions" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#how-to-make-plain-actions-from-static-member-or-free-functions" id="id1">How to make Plain Actions from Static Member or Free Functions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#case-1-function-in-the-main-program-source-in-global-namespace" id="id2">Case 1 : Function in the main program source in global namespace</a></p></li>
+<li><p><a class="reference internal" href="#case-2-function-in-the-main-program-source-in-custom-namespace" id="id3">Case 2 : Function in the main program source in custom namespace</a></p></li>
+<li><p><a class="reference internal" href="#case-3-function-in-main-program-in-custom-namespace-in-separate-header-source-file-pair" id="id4">Case 3 : Function in main program in custom namespace in separate header/source file pair</a></p></li>
+<li><p><a class="reference internal" href="#case-4-exporting-free-function-in-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action" id="id5">Case 4: Exporting free function in namespace, from a shared library (.dll or .so), and use it as plain  Action</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
 <dl class="simple">
 <dt>Use Case Variables:</dt><dd><ol class="arabic simple">
 <li><dl class="simple">
-<dt>Free Function Namespace</dt><dd><ul class="simple">
+<dt>Function Namespace</dt><dd><ul class="simple">
 <li><p>Inside a namespace</p></li>
 <li><p>In the global namespace</p></li>
 </ul>
@@ -165,7 +234,7 @@
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Free Function location and linkage</dt><dd><ul class="simple">
+<dt>Function location and linkage</dt><dd><ul class="simple">
 <li><p>In main program source</p></li>
 <li><p>In a separate header/source file pair</p></li>
 <li><p>Inside a static or shared library</p></li>
@@ -174,7 +243,7 @@
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Free function return type</dt><dd><ul class="simple">
+<dt>Function return type</dt><dd><ul class="simple">
 <li><p>returning a value</p></li>
 <li><p>void return value</p></li>
 <li><p>This just influences the way how the action created from it can be invoked.</p></li>
@@ -185,11 +254,11 @@
 </ol>
 </dd>
 </dl>
-<div class="section" id="case-1-free-function-in-the-main-program-source-in-global-namespace">
-<h2>Case 1 : Free function in the main program source in global namespace<a class="headerlink" href="#case-1-free-function-in-the-main-program-source-in-global-namespace" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="case-1-function-in-the-main-program-source-in-global-namespace">
+<h2><a class="toc-backref" href="#id2">Case 1 : Function in the main program source in global namespace</a><a class="headerlink" href="#case-1-function-in-the-main-program-source-in-global-namespace" title="Permalink to this headline">¶</a></h2>
 <p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_1</span></code></p>
 <dl class="simple">
-<dt>Needed Macros:</dt><dd><p>main.cpp: <a class="reference external" href="https://stellar-group.github.io/hpx/docs/sphinx/latest/singlehtml/index.html#c.HPX_PLAIN_ACTION">HPX_PLAIN_ACTION</a>.</p>
+<dt>Needed Macros:</dt><dd><p>main.cpp: <a href="#id6"><span class="problematic" id="id7">`HPX_PLAIN_ACTION &lt;&gt;`_</span></a>.</p>
 </dd>
 </dl>
 <p>This is the most simple case, but also limited. It would not work for a header file because it would create double definitions when included into several source files.</p>
@@ -228,8 +297,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="case-2-free-function-in-the-main-program-source-in-custom-namespace">
-<h2>Case 2 : Free function in the main program source in custom namespace<a class="headerlink" href="#case-2-free-function-in-the-main-program-source-in-custom-namespace" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="case-2-function-in-the-main-program-source-in-custom-namespace">
+<h2><a class="toc-backref" href="#id3">Case 2 : Function in the main program source in custom namespace</a><a class="headerlink" href="#case-2-function-in-the-main-program-source-in-custom-namespace" title="Permalink to this headline">¶</a></h2>
 <p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_2</span></code></p>
 <dl class="simple">
 <dt>Needed Macros:</dt><dd><p>main.cpp: <a class="reference external" href="https://stellar-group.github.io/hpx/docs/sphinx/latest/singlehtml/index.html#c.HPX_PLAIN_ACTION">HPX_PLAIN_ACTION</a></p>
@@ -273,8 +342,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="case-3-free-function-in-main-program-in-custom-namespace-in-separate-header-source-file-pair">
-<h2>Case 3 : Free function in main program in custom namespace in separate header/source file pair<a class="headerlink" href="#case-3-free-function-in-main-program-in-custom-namespace-in-separate-header-source-file-pair" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="case-3-function-in-main-program-in-custom-namespace-in-separate-header-source-file-pair">
+<h2><a class="toc-backref" href="#id4">Case 3 : Function in main program in custom namespace in separate header/source file pair</a><a class="headerlink" href="#case-3-function-in-main-program-in-custom-namespace-in-separate-header-source-file-pair" title="Permalink to this headline">¶</a></h2>
 <p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_3</span></code></p>
 <dl>
 <dt>Needed Macros:</dt><dd><div class="line-block">
@@ -350,8 +419,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="case-4-exporting-a-free-function-which-also-lives-in-a-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action">
-<h2>Case 4: Exporting a free function which also lives in a namespace, from a shared library (.dll or .so), and use it as plain  Action<a class="headerlink" href="#case-4-exporting-a-free-function-which-also-lives-in-a-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="case-4-exporting-free-function-in-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action">
+<h2><a class="toc-backref" href="#id5">Case 4: Exporting free function in namespace, from a shared library (.dll or .so), and use it as plain  Action</a><a class="headerlink" href="#case-4-exporting-free-function-in-namespace-from-a-shared-library-dll-or-so-and-use-it-as-plain-action" title="Permalink to this headline">¶</a></h2>
 <p>Example sourcecode in the repository is at <code class="docutils literal notranslate"><span class="pre">/src/action_and_component_macros/case_4</span></code></p>
 <dl>
 <dt>Macros needed:</dt><dd><div class="line-block">
@@ -464,11 +533,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Yorlik, https://github.com/McKillroy/hpx_snippets
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -479,7 +556,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

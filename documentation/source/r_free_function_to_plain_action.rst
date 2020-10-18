@@ -1,31 +1,33 @@
 .. r_free_function_to_plain_action.rst
 
-How to make Plain Actions from Free Functions
-===============================================
+How to make Plain Actions from Static Member or Free Functions
+===================================================================
+
+.. contents::
 
 Use Case Variables: 
-  1. Free Function Namespace
+  1. Function Namespace
       * Inside a namespace
       * In the global namespace
   
-  2. Free Function location and linkage
+  2. Function location and linkage
       * In main program source
       * In a separate header/source file pair
       * Inside a static or shared library 
   
-  3. Free function return type
+  3. Function return type
       * returning a value 
       * void return value
       * This just influences the way how the action created from it can be invoked.
 
 
-Case 1 : Free function in the main program source in global namespace 
+Case 1 : Function in the main program source in global namespace 
 --------------------------------------------------------------------------------
 
 Example sourcecode in the repository is at ``/src/action_and_component_macros/case_1``
 
 Needed Macros:  
-    main.cpp: `HPX_PLAIN_ACTION`_.
+    main.cpp: `HPX_PLAIN_ACTION <>`_.
 
 This is the most simple case, but also limited. It would not work for a header file because it would create double definitions when included into several source files.
 
@@ -66,7 +68,7 @@ Example:
   auto my_future = HPX::async<compute_something_action>(some_locality_id, 371);
 
 
-Case 2 : Free function in the main program source in custom namespace 
+Case 2 : Function in the main program source in custom namespace 
 --------------------------------------------------------------------------------
 
 Example sourcecode in the repository is at ``/src/action_and_component_macros/case_2``
@@ -118,7 +120,7 @@ This case works almost the same as case 1. You just have to apply the fully qual
 
 
 
-Case 3 : Free function in main program in custom namespace in separate header/source file pair
+Case 3 : Function in main program in custom namespace in separate header/source file pair
 -------------------------------------------------------------------------------------------------------
 
 Example sourcecode in the repository is at ``/src/action_and_component_macros/case_3``
@@ -201,7 +203,7 @@ Needed Macros:
 
 
 
-Case 4: Exporting a free function which also lives in a namespace, from a shared library (.dll or .so), and use it as plain  Action
+Case 4: Exporting free function in namespace, from a shared library (.dll or .so), and use it as plain  Action
 --------------------------------------------------------------------------------------------------------------------------------------
 
 Example sourcecode in the repository is at ``/src/action_and_component_macros/case_4``
@@ -299,6 +301,8 @@ Macros needed:
            return 0;
        }
 
+
+.. links -----------------------------------------------------------------------------
 
 .. _HPX_COMPONENT_EXPORT: https://stellar-group.github.io/hpx/docs/sphinx/latest/singlehtml/index.html#c.HPX_COMPONENT_EXPORT
 .. _HPX_DEFINE_PLAIN_ACTION: https://stellar-group.github.io/hpx/docs/sphinx/latest/singlehtml/index.html#c.HPX_DEFINE_PLAIN_ACTION

@@ -20,6 +20,7 @@
 Suggestion A: 
 ------------------
 * Central id_block administration
+
 **Terms**
     Dictionary Service : The DS is the locality responsible for the resolution of a given object.
     Segment Table :      A table holding references of id blocks to locality ids
@@ -66,17 +67,18 @@ Example:
         Check size of remaining id_block, request new id_block if needed.
 
 * Retrieve
+
 | a. id → local_cache → cache_miss → id_segment → locality/dictionary service → query
 | b. id → local_cache → cache_hit  → request    → success
 | c. id → local_cache → cache_hit  → request    → failure → invalidate cache, retry
 | d. When c. happens: Action forwarding by the dictionary service?
 
-
 * Update
+
     Ids are const. No Updates. (except id change??)
 
-
 * Delete
+
     Delete Component and notify Dictionary Service.
 
 

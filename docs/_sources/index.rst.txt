@@ -15,7 +15,11 @@ Welcome to the HPX Cookbook!
    scalability
    hpx_basics
    concepts
+   hpx_parallel_execution
+   hpx_concurrency_management
+   hpx_distributed_computing
    recipes   
-   todo_list
+
+.. todo_list
    
 

@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,27 +11,29 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -47,11 +48,11 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
           
 
           
-            <a href="index.html" class="icon icon-home"> HPX Cookbook
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> HPX Cookbook
           
 
           
@@ -74,6 +75,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -86,22 +88,69 @@
 <li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Section 2 : Introduction to the Problem</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#part-i-moore-s-law-and-the-free-lunch-is-over-problem">Part I : Moore’s Law and “The Free Lunch is Over” problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#a-concurrency">A. Concurrency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#b-parallelism">B. Parallelism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c-distributed-computing">C. Distributed Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-concurrency">A. Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#b-parallelism">B. Parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-distributed-computing">C. Distributed Computing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Helpful concepts to fully understand and leverage HPX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 6 : A collection of HPX Recipes, HowTos and Drafts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#scalability">Scalability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#amdahls-law">Amdahls Law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#the-universal-scalability-law-usl">The Universal Scalability Law “USL”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#consequences-of-the-usl-for-writing-your-application">Consequences of the USL for writing your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#introduction-to-hpx">Introduction to HPX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#parallelization">Parallelization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#concurrency">Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#distribution">Distribution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Concepts needed to understand and leverage HPX</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#general-programming-concepts">General Programming Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#c-concepts">C++ Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#hpx-concepts">HPX Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_parallel_execution.html">Section 6: HPX Parallel Task Execution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#calls-into-the-runtime">Calls into the runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#executors-and-execution-policies">Executors and Execution Policies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_concurrency_management.html">Section 7: HPX Concurrency Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#futures">Futures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#synchronous-and-asynchronous-calls">Synchronous and Asynchronous Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_distributed_computing.html">Section 8: HPX Distributed Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#locality">Locality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#component">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#action">Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#hpx-serialization-and-transport">HPX Serialization and Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 42 : A collection of HPX Recipes, HowTos and Drafts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-action-and-component-macros">HPX Action and Component Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-other">HPX Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#drafts">Drafts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#general-c">General C++</a></li>
+</ul>
+</li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -140,7 +189,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Section 2 : Introduction to the Problem</li>
     
@@ -162,17 +211,34 @@
            <div itemprop="articleBody">
             
   <div class="section" id="section-2-introduction-to-the-problem">
-<h1>Section 2 : Introduction to the Problem<a class="headerlink" href="#section-2-introduction-to-the-problem" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id1">Section 2 : Introduction to the Problem</a><a class="headerlink" href="#section-2-introduction-to-the-problem" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#section-2-introduction-to-the-problem" id="id1">Section 2 : Introduction to the Problem</a></p>
+<ul>
+<li><p><a class="reference internal" href="#part-i-moore-s-law-and-the-free-lunch-is-over-problem" id="id2">Part I : Moore’s Law and “The Free Lunch is Over” problem</a></p></li>
+<li><p><a class="reference internal" href="#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing" id="id3">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a></p>
+<ul>
+<li><p><a class="reference internal" href="#a-concurrency" id="id4">A. Concurrency</a></p></li>
+<li><p><a class="reference internal" href="#b-parallelism" id="id5">B. Parallelism</a></p></li>
+<li><p><a class="reference internal" href="#c-distributed-computing" id="id6">C. Distributed Computing</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="part-i-moore-s-law-and-the-free-lunch-is-over-problem">
-<h2>Part I : Moore’s Law and “The Free Lunch is Over” problem<a class="headerlink" href="#part-i-moore-s-law-and-the-free-lunch-is-over-problem" title="Permalink to this headline">¶</a></h2>
-<p>Read this article by Herb Sutter in Dr.Dobbs Journal:</p>
+<h2><a class="toc-backref" href="#id2">Part I : Moore’s Law and “The Free Lunch is Over” problem</a><a class="headerlink" href="#part-i-moore-s-law-and-the-free-lunch-is-over-problem" title="Permalink to this headline">¶</a></h2>
+<p>Read this article by Herb Sutter, originally published in Dr.Dobbs Journal:</p>
 <p><a class="reference external" href="http://www.gotw.ca/publications/concurrency-ddj.htm">The Free Lunch Is Over: A Fundamental Turn Toward Concurrency in Software</a></p>
+<p>He made a follow-up: <a class="reference external" href="https://herbsutter.com/welcome-to-the-jungle/">Welcome to the jungle</a></p>
 </div>
 <div class="section" id="part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">
-<h2>Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing<a class="headerlink" href="#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing" title="Permalink to this headline">¶</a></h2>
-</div>
+<h2><a class="toc-backref" href="#id3">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a><a class="headerlink" href="#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="a-concurrency">
-<h2>A. Concurrency<a class="headerlink" href="#a-concurrency" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id4">A. Concurrency</a><a class="headerlink" href="#a-concurrency" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p>Concurrency happens, when several agents (read: threads of execution) have access to the same data at the same time, and at least one of them is writing to the data.</p>
 </div></blockquote>
@@ -186,13 +252,13 @@
 </dl>
 </div>
 <div class="section" id="b-parallelism">
-<h2>B. Parallelism<a class="headerlink" href="#b-parallelism" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id5">B. Parallelism</a><a class="headerlink" href="#b-parallelism" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p>Parallelism is NOT concurrency! E.g. if there is read-only access to data, no concurrecy is happening but there might be parallel reads. This implies that immutable state can help avoiding concurrency problems where applicable.</p>
 </div></blockquote>
 </div>
 <div class="section" id="c-distributed-computing">
-<h2>C. Distributed Computing<a class="headerlink" href="#c-distributed-computing" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id6">C. Distributed Computing</a><a class="headerlink" href="#c-distributed-computing" title="Permalink to this headline">¶</a></h3>
 <p>Essentially distributed computing is parallel computing with some bonus problems:</p>
 <ul class="simple">
 <li><p>Increased crosstalk cost (network latency)</p></li>
@@ -200,6 +266,7 @@
 <li><p>Node Failure</p></li>
 <li><p>Additional security issues</p></li>
 </ul>
+</div>
 </div>
 </div>
 
@@ -223,11 +290,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Yorlik, https://github.com/McKillroy/hpx_snippets
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -238,7 +313,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

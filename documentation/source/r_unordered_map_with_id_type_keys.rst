@@ -3,7 +3,9 @@
 Creating unordered map with id_type keys
 ==============================================
 
-**Step 1:** Define your object and component actions in the header file
+``std::unordered_map`` needs a working hashing function. 
+
+The functor below provides one that works with id_types:
 
     .. code-block:: cpp
     
@@ -13,5 +15,5 @@ Creating unordered map with id_type keys
            }
        };
 
-       // map id_type on 32 indices in a vector
+       // map id_types to uint32_t indices (which might point to a position in some std::array<>):
        unordered_map<id_type, uint32_t, IDTYPE_HASH> index;

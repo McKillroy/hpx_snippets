@@ -16,7 +16,7 @@ Repository for this Documentation
 HPX by Ste||ar Group
   `Ste||ar Group HPX Homepage <http://stellar-group.org/libraries/hpx/>`_
   
-  `HPX Master Documentation <https://stellar-group.github.io/hpx/docs/sphinx/branches/master/singlehtml/index.html>`_    
+  `HPX Master Documentation <https://hpx-docs.stellar-group.org>`_    
   
   `HPX Git Repository <https://github.com/STEllAR-GROUP/hpx>`_
 

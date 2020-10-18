@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,27 +11,29 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -45,11 +46,11 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
           
 
           
-            <a href="index.html" class="icon icon-home"> HPX Cookbook
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> HPX Cookbook
           
 
           
@@ -72,6 +73,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -82,17 +84,71 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about.html">Section 1 : About this Document and the associated Git Repository</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Helpful concepts to fully understand and leverage HPX</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 6 : A collection of HPX Recipes, HowTos and Drafts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="todo_list.html">Work Doc : Current ToDo List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Section 2 : Introduction to the Problem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#part-i-moore-s-law-and-the-free-lunch-is-over-problem">Part I : Moore’s Law and “The Free Lunch is Over” problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#part-ii-some-thoughts-on-concurrency-parallelism-and-distributed-computing">Part II : Some thoughts on Concurrency, Parallelism and Distributed Computing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#a-concurrency">A. Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#b-parallelism">B. Parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro.html#c-distributed-computing">C. Distributed Computing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scalability.html">Section 3 : Scalability, Amdahls Law and the USL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#scalability">Scalability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#amdahls-law">Amdahls Law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#the-universal-scalability-law-usl">The Universal Scalability Law “USL”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scalability.html#consequences-of-the-usl-for-writing-your-application">Consequences of the USL for writing your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_basics.html">Section 4 : HPX Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#introduction-to-hpx">Introduction to HPX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-do-for-you">What can HPX do for you?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#what-can-hpx-not-do-for-you">What can HPX NOT do for you</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_basics.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#parallelization">Parallelization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#concurrency">Concurrency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpx_basics.html#distribution">Distribution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Section 5: Concepts needed to understand and leverage HPX</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#general-programming-concepts">General Programming Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#c-concepts">C++ Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#hpx-concepts">HPX Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_parallel_execution.html">Section 6: HPX Parallel Task Execution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#calls-into-the-runtime">Calls into the runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_parallel_execution.html#executors-and-execution-policies">Executors and Execution Policies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_concurrency_management.html">Section 7: HPX Concurrency Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#futures">Futures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_concurrency_management.html#synchronous-and-asynchronous-calls">Synchronous and Asynchronous Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hpx_distributed_computing.html">Section 8: HPX Distributed Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#locality">Locality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#component">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#action">Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpx_distributed_computing.html#hpx-serialization-and-transport">HPX Serialization and Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recipes.html">Section 42 : A collection of HPX Recipes, HowTos and Drafts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-action-and-component-macros">HPX Action and Component Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#hpx-other">HPX Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#drafts">Drafts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recipes.html#general-c">General C++</a></li>
+</ul>
+</li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -131,7 +187,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>HPX Macros for Components and Actions</li>
     
@@ -152,33 +208,157 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="hpx-macros-for-components-and-actions">
-<h1>HPX Macros for Components and Actions<a class="headerlink" href="#hpx-macros-for-components-and-actions" title="Permalink to this headline">¶</a></h1>
+  <div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#hpx-macros-for-components-and-actions" id="id1">HPX Macros for Components and Actions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#creating-a-usable-action-define-and-register" id="id2">Creating a usable action: Define and Register</a></p></li>
+<li><p><a class="reference internal" href="#putting-components-and-actions-into-shared-libraries" id="id3">Putting components and actions into shared libraries</a></p></li>
+<li><p><a class="reference internal" href="#action-macros" id="id4">Action Macros</a></p></li>
+<li><p><a class="reference internal" href="#component-macros" id="id5">Component Macros</a></p></li>
+<li><p><a class="reference internal" href="#macros-for-shared-library-symbol-export-for-actions-and-components" id="id6">Macros for Shared Library Symbol Export for Actions and Components</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="hpx-macros-for-components-and-actions">
+<h1><a class="toc-backref" href="#id1">HPX Macros for Components and Actions</a><a class="headerlink" href="#hpx-macros-for-components-and-actions" title="Permalink to this headline">¶</a></h1>
 <p>When declaring and defining HPX components and -actions several macros are being used to create necessary boilerplate code. It is easy to get these wrong and make stupid mistakes, I am speaking out of experience!</p>
 <p>In the end, once learned it is just a recipe to be applied. In the meantime it can be a debugging hell if you don’t know what you are doing.</p>
 <p>The purpose of this document is to help others getting started with them and getting more secure about their use myself.</p>
-<p>Several parameters influence how the macros should be used:</p>
-<ul class="simple">
-<li><p>Static versus dynamic Linkage</p></li>
-<li><p>Component actions (from methods) versus plain actions (from free functions)</p></li>
-<li><p>Having the source functions within a namespace or not.</p></li>
-</ul>
-<p>The following Macros are being used:</p>
-<dl>
-<dt>HPX_DECLARE_ACTION and HPX_DECLARE_PLAIN_ACTION</dt><dd><p>From <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/basic_action.hpp</span></code> and <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/plain_action.hpp</span></code>:</p>
-<p><em>Undocumented</em></p>
-</dd>
-</dl>
-<p><strong>Note:</strong> These macros after a chain of macros finally lead to HPX_DECLARE_ACTION_2 which ends up with a simple struct declaration where the name depends on the parameters:</p>
-<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">name</span><span class="p">;</span>
+<div class="section" id="creating-a-usable-action-define-and-register">
+<h2><a class="toc-backref" href="#id2">Creating a usable action: Define and Register</a><a class="headerlink" href="#creating-a-usable-action-define-and-register" title="Permalink to this headline">¶</a></h2>
+<p>I assume you already have a header and a source file pair with your function declaration and definition in them.</p>
+<p>The process of creating a usable action from it then is a two-step process, consisting of an <em>action definition</em>, which defines a type and is done in the header file and an <em>action registration</em>, which is done in the source file. To be usable everywhere, <em>the registration also must be declared</em> in the header file. So - the second step has two steps which means in the end it comes down to using three macros - two in the header file and one in the source file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Header file (.hpp): Action Definition
+Source file (.cpp): Action Registration
+Header file (.hpp): Declaration of the Action Registration
 </pre></div>
 </div>
-<p><strong>Typical Use Case:</strong> HK: yt?</p>
-<dl class="simple">
-<dt>HPX_DEFINE_PLAIN_ACTION</dt><dd><p>This macro is being used to define a plain action. <strong>This is the only macro which is allowed inside a namespace. All other macros MUST be used in the global namespace!</strong> Don’t confuse it with HPX_DECLARE_PLAIN_ACTION above!</p>
-</dd>
-</dl>
-<p>Example use:</p>
+<ol class="arabic">
+<li><p><strong>Define</strong> an action</p>
+<blockquote>
+<div><p>Internally defining an action with the according macro binds the local function address to the action type (a struct) which then is being used to call the function after receiving a serialized package with the information from a remote partner.</p>
+<p>When an action is used locally the action struct is also working as a functor for synchronous local calls.</p>
+<p>Technically on creation the function address to the wrapped function is passed as an integral template argument (Implementation Detail, see <code class="docutils literal notranslate"><span class="pre">hpx::actions::make_action</span></code> in <code class="docutils literal notranslate"><span class="pre">runtime\actions\basic_action.hpp</span></code> if you are interested in the nitty gritty details).</p>
+<p>Since this is a type definition (not a function definition) there is no problem having these macros in the header file. Actually you need them in the header file only or stuff will break.</p>
+<p><strong>Special case</strong></p>
+<p>Declaring an action would be done like <code class="docutils literal notranslate"><span class="pre">HPX_DECLARE_ACTION(myFunction_action)</span></code> which expands to <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">myFunction_action;</span></code> - all actions are just structs.
+You might want to use that in special situations, normally it’s not needed, since actions (they are types) are already defined in the header file.</p>
+</div></blockquote>
+</li>
+<li><p><strong>Register</strong> an action: A two-step process</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Registering the action is a two-phase process</strong></p></li>
+</ul>
+<p>The registration process is a combination of two things:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The Definition of auxiliary functions in the source file</p></li>
+<li><p>The declaration of these functions in the header file. ( 1. and 2. Explained further below)</p></li>
+</ol>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>A. Registering the action</strong></p></li>
+</ul>
+<p>Registering an action (“Action Registration”) is done in the source file (.cpp) and defines auxiliary functions needed for serialization/deserialization of the action.</p>
+<p>Example:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// In the source file (.cpp)</span>
+<span class="c1">// Registers the action &quot;my_namespace::my_function_action&quot; with HPX and</span>
+<span class="c1">// assigns the name &quot;my_function_action_name_for_serialization&quot; to it so it can be serialized.</span>
+<span class="c1">// This new and system-wide unique C-Identifier is also being used for naming the auxiliary</span>
+<span class="c1">// functions which are being created in the process.</span>
+
+<span class="n">HPX_REGISTER_ACTION</span><span class="p">(</span> <span class="n">my_namespace</span><span class="o">::</span><span class="n">my_function_action</span><span class="p">,</span> <span class="n">my_function_action_name_for_serialization</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>my_function_action_name_for_serialization MUST be a system wide UNIQUE and valid C-Identifier !!!</p>
+<ul class="simple">
+<li><p><strong>B. Declare an action registration</strong></p></li>
+</ul>
+<p>The Declaration of the auxiliary functions described above is done in the header file (.hpp) with <strong>HPX_DECLARE_ACTION_REGISTRATION</strong>.</p>
+<p>The arguments MUST be the same, just like when declaring and defining conventional functions in a header/source file pair.</p>
+<p>Example:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// In the header file (.hpp)</span>
+<span class="c1">// Declares the action registration</span>
+<span class="n">HPX_DECLARE_ACTION_REGISTRATION</span><span class="p">(</span> <span class="n">my_namespace</span><span class="o">::</span><span class="n">my_function_action</span><span class="p">,</span> <span class="n">my_function_action_name_for_serialization</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Some Macros allow you to define the action and declare the registration in one move, e.g. <strong>HPX_PLAIN_ACTION</strong>.</p>
+</div></blockquote>
+</li>
+</ol>
+<p><strong>Several parameters influence macro usage:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Static versus dynamic Linkage</p></li>
+<li><p>Component actions (from methods) versus plain actions (from free functions or static member functions)</p></li>
+<li><p>Having the functions inside a namespace or not.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="putting-components-and-actions-into-shared-libraries">
+<h2><a class="toc-backref" href="#id3">Putting components and actions into shared libraries</a><a class="headerlink" href="#putting-components-and-actions-into-shared-libraries" title="Permalink to this headline">¶</a></h2>
+<p><strong>HPX_COMPONENT_EXPORT</strong> for components</p>
+<p><strong>CAVEAT:</strong> for functions used in actions You need to use your own export/import macros !!!</p>
+</div>
+<div class="section" id="action-macros">
+<h2><a class="toc-backref" href="#id4">Action Macros</a><a class="headerlink" href="#action-macros" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>HPX_DECLARE_ACTION</strong></p></li>
+</ul>
+<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/basic_action.hpp</span></code></p>
+<p><strong>Prototype:</strong></p>
+<p><strong>Parameters:</strong></p>
+<p><strong>Description:</strong></p>
+<blockquote>
+<div><p>Expands to <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">actionname;</span></code> Just a simple struct declaration if you need it.</p>
+</div></blockquote>
+<p><strong>Examples:</strong></p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// expands to struct my_action;</span>
+<span class="n">HPX_DECLARE_ACTION</span><span class="p">(</span><span class="n">my_action</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>HPX_DEFINE_PLAIN_ACTION</strong></p></li>
+</ul>
+<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/plain_action.hpp</span></code></p>
+<p><strong>Prototype:</strong></p>
+<blockquote>
+<div><p>HPX_DEFINE_PLAIN_ACTION( QualifiedFunctionName, PlainActionName = QualifiedFunctionName_action)</p>
+</div></blockquote>
+<p><strong>Description:</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">HPX_DEFINE_PLAIN_ACTION is being used to <em>define</em> a plain action.</div>
+<div class="line"><strong>HPX_DEFINE_PLAIN_ACTION is the only macro which is allowed inside a namespace.</strong></div>
+<div class="line"><strong>All other macros MUST be used in the global namespace!</strong></div>
+<div class="line"><br /></div>
+<div class="line">Don’t confuse it with HPX_DECLARE_PLAIN_ACTION above!</div>
+<div class="line"><br /></div>
+<div class="line">It defines the action linked to the function you want to expose as described below.</div>
+<div class="line">You can forward declare any action with <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">action_name;</span></code></div>
+</div>
+</div></blockquote>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Non Member Function: (Free Function or static member),</div>
+<div class="line"><em>Note:</em> Fully Qualified if outside namespace (Out of the perspective of the Macro placement)</div>
+<div class="line"><em>Note:</em> Second Parameter defaults to “_action” being appended like <code class="docutils literal notranslate"><span class="pre">FunctionName_action</span></code></div>
+</div>
+</div></blockquote>
+<p><strong>Examples:</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">HPX_DEFINE_PLAIN_ACTION( my_function )</div>
+<div class="line">results in an action definition: my_function_action</div>
+</div>
+<div class="line-block">
+<div class="line">HPX_DEFINE_PLAIN_ACTION( my_function, my_function_a )</div>
+<div class="line">results in an action definition: my_function_a</div>
+</div>
 <div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Some header file:</span>
 
 <span class="k">namespace</span> <span class="n">app</span><span class="p">{</span>
@@ -195,211 +375,144 @@
 <span class="n">HPX_REGISTER_ACTION_DECLARATION</span><span class="p">(</span><span class="n">app</span><span class="o">::</span><span class="n">my_free_function_action</span><span class="p">,</span> <span class="n">my_free_function_action</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl>
-<dt>HPX_REGISTER_ACTION_DECLARATION</dt><dd><p>From <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/basic_action.hpp</span></code>:</p>
-<blockquote>
-<div><p><em>“Declare the necessary component action boilerplate code.</em></p>
-<p><em>The macro HPX_REGISTER_ACTION_DECLARATION can be used to declare all the boilerplate code which is required for proper functioning of component actions in the context of HPX.</em></p>
-<p><em>The parameter action is the type of the action to declare the boilerplate for.</em></p>
-<p><em>This macro can be invoked with an optional second parameter. This parameter specifies a unique name of the action to be used for serialization purposes. The second parameter has to be specified if the first parameter is not usable as a plain (non-qualified) C++ identifier, i.e. the first parameter contains special characters which cannot be part of a C++ identifier, such as ‘&lt;’, ‘&gt;’, or ‘:’.”</em></p>
 </div></blockquote>
-</dd>
-</dl>
-<p><strong>Note:</strong> The macro is also used for plain actions, not just component actions.</p>
-<dl>
-<dt>HPX_PLAIN_ACTION</dt><dd><p>From <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/plain_action.hpp</span></code>:</p>
-<p><em>Defines a plain action type based on the given function func and registers it with HPX.</em></p>
-<p><em>The macro HPX_PLAIN_ACTION can be used to define a plain action (e.g. an action encapsulating a global or free function) based on the given function func. It defines the action type name representing the given function. This macro additionally registers the newly define action type with HPX.</em></p>
-<p><em>The parameter func is a global or free (non-member) function which should be encapsulated into a plain action. The parameter name is the name of the action type defined by this macro.</em></p>
-</dd>
-</dl>
-<p><strong>Note:</strong></p>
-<dl>
-<dt>HPX_PLAIN_ACTION_ID</dt><dd><p>From <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/plain_action.hpp</span></code>:</p>
-<p><em>Defines a plain action type based on the given function func and registers it with HPX.</em></p>
-<p><em>The macro HPX_PLAIN_ACTION_ID can be used to define a plain action (e.g. an action encapsulating a global or free function) based on the given function func. It defines the action type actionname representing the given function.</em></p>
-<p><em>The parameter actionid specifies an unique integer value which will be used to represent the action during serialization.</em></p>
-<p><em>The parameter func is a global or free (non-member) function which should be encapsulated into a plain action. The parameter name is the name of the action type defined by this macro.</em></p>
-<p><em>The second parameter has to be usable as a plain (non-qualified) C++ identifier, it should not contain special characters which cannot be part of a C++ identifier, such as ‘&lt;’, ‘&gt;’, or ‘:’.</em></p>
-</dd>
-</dl>
-<p><strong>Note:</strong> Looks like combining HPX_DEFINE_PLAIN_ACTION with HPX_REGISTER_ACTION_DECLARATION. Is that correct?</p>
-<dl>
-<dt>HPX_REGISTER_ACTION</dt><dd><p>From <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/basic_action.hpp</span></code>:</p>
-<p><em>“Define the necessary component action boilerplate code.</em></p>
-<p><em>The macro HPX_REGISTER_ACTION can be used to define all the boilerplate code which is required for proper functioning of component actions in the context of HPX.</em></p>
-<p><em>The parameter action is the type of the action to define the boilerplate for.</em></p>
-<p><em>This macro can be invoked with an optional second parameter. This parameter specifies a unique name of the action to be used for serialization purposes. The second parameter has to be specified if the first parameter is not usable as a plain (non-qualified) C++ identifier, i.e. the first parameter contains special characters which cannot be part of a C++ identifier, such as ‘&lt;’, ‘&gt;’, or ‘:’.</em></p>
-<p><strong>Note:</strong> <em>This macro has to be used once for each of the component actions defined using one of the HPX_DEFINE_COMPONENT_ACTION or HPX_DEFINE_PLAIN_ACTION macros. It has to occur exactly once for each of the actions, thus it is recommended to place it into the source file defining the component. Only one of the forms of this macro HPX_REGISTER_ACTION or HPX_REGISTER_ACTION_ID should be used for a particular action, never both.”</em></p>
-</dd>
-</dl>
-<ul>
-<li><dl>
-<dt>HPX_REGISTER_COMPONENT_MODULE</dt><dd><p>From <code class="docutils literal notranslate"><span class="pre">hpx/runtime/components/component_factory_base.hpp</span></code>:</p>
-<p><em>This macro is used to define the required Hpx.Plugin entry points. This macro has to be used in exactly one compilation unit of a component module.</em></p>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt>HPX_REGISTER_COMPONENT</dt><dd><p>From <code class="docutils literal notranslate"><span class="pre">hpx/runtime/components/component_factory.hpp</span></code>:</p>
-<p><em>Undocumented</em></p>
-</dd>
-</dl>
-</li>
+<ul class="simple">
+<li><p><strong>HPX_PLAIN_ACTION</strong></p></li>
 </ul>
-<div class="section" id="important-hpx-macros-by-file">
-<h2>Important HPX Macros by file<a class="headerlink" href="#important-hpx-macros-by-file" title="Permalink to this headline">¶</a></h2>
-<p>File: <code class="docutils literal notranslate"><span class="pre">basic_action.hpp</span></code></p>
+<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/plain_action.hpp</span></code></p>
+<p><strong>Prototype:</strong></p>
+<p><strong>Description:</strong></p>
+<div class="line-block">
+<div class="line"><em>Defines a plain action type based on the given function func and registers it with HPX.</em></div>
+<div class="line"><em>The macro HPX_PLAIN_ACTION can be used to define a plain action (e.g. an action encapsulating a global or free function) based on the given function func. It defines the action type name representing the given function. This macro additionally registers the newly define action type with HPX.</em></div>
+<div class="line"><em>The parameter func is a global or free (non-member) function which should be encapsulated into a plain action. The parameter name is the name of the action type defined by this macro.</em></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Put example code here ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>HPX_DECLARE_PLAIN_ACTION</strong></p></li>
+</ul>
+<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/plain_action.hpp</span></code></p>
+<p><strong>Prototype:</strong></p>
+<p><strong>Description:</strong></p>
+<blockquote>
+<div><p><em>Undocumented</em>
+Definition + Registration Declaration ???
+Still requires proper registration in the sources.</p>
+</div></blockquote>
+<p><strong>Note:</strong> These macros after a chain of macros finally lead to HPX_DECLARE_ACTION_2 which ends up with a simple struct declaration where the name depends on the parameters:</p>
+<p><strong>Parameters:</strong></p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">name</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>HPX_REGISTER_ACTION</strong></p></li>
+</ul>
+<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/basic_action.hpp</span></code></p>
+<p><strong>Prototype:</strong></p>
+<p><strong>Parameters:</strong></p>
+<p><strong>Description:</strong></p>
+<div class="line-block">
+<div class="line"><em>“Define the necessary component action boilerplate code.</em></div>
+<div class="line"><em>The macro HPX_REGISTER_ACTION can be used to define all the boilerplate code which is required for proper functioning of component actions in the context of HPX.</em></div>
+<div class="line"><em>The parameter action is the type of the action to define the boilerplate for.</em></div>
+<div class="line"><em>This macro can be invoked with an optional second parameter. This parameter specifies a unique name of the action to be used for serialization purposes. The second parameter has to be specified if the first parameter is not usable as a plain (non-qualified) C++ identifier, i.e. the first parameter contains special characters which cannot be part of a C++ identifier, such as ‘&lt;’, ‘&gt;’, or ‘:’.</em></div>
+</div>
+<p><strong>Note:</strong> <em>This macro has to be used once for each of the component actions defined using one of the HPX_DEFINE_COMPONENT_ACTION or HPX_DEFINE_PLAIN_ACTION macros. It has to occur exactly once for each of the actions, thus it is recommended to place it into the source file defining the component. Only one of the forms of this macro HPX_REGISTER_ACTION or HPX_REGISTER_ACTION_ID should be used for a particular action, never both.”</em></p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Put example code here ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>HPX_REGISTER_ACTION_DECLARATION</strong></p></li>
+</ul>
+<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">hpx/runtime/actions/basic_action.hpp</span></code></p>
+<p><strong>Prototype:</strong></p>
+<p><strong>Parameters:</strong></p>
+<p><strong>Description:</strong></p>
+<div class="line-block">
+<div class="line"><em>“Declare the necessary component action boilerplate code.</em></div>
+<div class="line"><em>The macro HPX_REGISTER_ACTION_DECLARATION can be used to declare all the boilerplate code which is required for proper functioning of component actions in the context of HPX.</em></div>
+<div class="line"><em>The parameter action is the type of the action to declare the boilerplate for.</em></div>
+<div class="line"><em>This macro can be invoked with an optional second parameter. This parameter specifies a unique name of the action to be used for serialization purposes. The second parameter has to be specified if the first parameter is not usable as a plain (non-qualified) C++ identifier, i.e. the first parameter contains special characters which cannot be part of a C++ identifier, such as ‘&lt;’, ‘&gt;’, or ‘:’.”</em></div>
+</div>
+<p><strong>Note:</strong> The macro is also used for plain actions, not just component actions.</p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Put example code here ...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="component-macros">
+<h2><a class="toc-backref" href="#id5">Component Macros</a><a class="headerlink" href="#component-macros" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>HPX_REGISTER_COMPONENT_MODULE</strong></p></li>
+</ul>
+<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">hpx/runtime/components/component_factory_base.hpp</span></code></p>
+<p><strong>Prototype:</strong></p>
+<dl class="simple">
+<dt><strong>Parameters:</strong></dt><dd><p>None</p>
+</dd>
+</dl>
+<p><strong>Description:</strong></p>
 <blockquote>
 <div><div class="line-block">
-<div class="line">HPX_REGISTER_ACTION</div>
-<div class="line">HPX_REGISTER_ACTION_DECLARATION</div>
-<div class="line">HPX_REGISTER_ACTION_ID</div>
+<div class="line">This macro is used to define the required Hpx.Plugin entry points.</div>
+<div class="line">It has to be used in exactly one compilation unit of a component module.</div>
+<div class="line">It creates the module wide component registry.</div>
 </div>
 </div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">component_action.hpp</span></code></p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// In the source file (.cpp)</span>
+<span class="c1">// needed only once per component source file</span>
+<span class="n">HPX_REGISTER_COMPONENT_MODULE</span><span class="p">();</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>HPX_REGISTER_COMPONENT</strong></p></li>
+</ul>
+<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">hpx/runtime/components/component_factory.hpp</span></code></p>
+<p><strong>Prototype:</strong></p>
+<p><strong>Parameters:</strong></p>
+<p><strong>Description:</strong></p>
 <blockquote>
-<div><p>HPX_DEFINE_COMPONENT_ACTION</p>
+<div><p>Needed once per component in the source file. Creates auxiliary functions (component factories) to remotely create the component.</p>
 </div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">plain_action.hpp</span></code></p>
+<p><strong>Examples:</strong></p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Put example code here ...</span>
+<span class="n">HPX_REGISTER_COMPONENT</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="macros-for-shared-library-symbol-export-for-actions-and-components">
+<h2><a class="toc-backref" href="#id6">Macros for Shared Library Symbol Export for Actions and Components</a><a class="headerlink" href="#macros-for-shared-library-symbol-export-for-actions-and-components" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>HPX_COMPONENT_EXPORT</strong></p></li>
+</ul>
+<p><strong>File:</strong> <code class="docutils literal notranslate"><span class="pre">hpx/config/export_definitions.hpp</span></code></p>
+<p><strong>Prototype:</strong></p>
 <blockquote>
 <div><div class="line-block">
-<div class="line">HPX_DECLARE_PLAIN_ACTION</div>
-<div class="line">HPX_DEFINE_PLAIN_ACTION</div>
-<div class="line">HPX_PLAIN_ACTION</div>
-<div class="line">HPX_PLAIN_ACTION_ID</div>
+<div class="line">HPX_COMPONENT_EXPORT class-key attr class-head-name base-clause { member-specification }</div>
 </div>
 </div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">component_commandline.hpp</span></code></p>
+<p><strong>Parameters:</strong></p>
+<blockquote>
+<div><p>None</p>
+</div></blockquote>
+<p><strong>Description:</strong></p>
 <blockquote>
 <div><div class="line-block">
-<div class="line">HPX_DEFINE_COMPONENT_COMMANDLINE_OPTIONS</div>
-<div class="line">HPX_REGISTER_COMMANDLINE_MODULE</div>
-<div class="line">HPX_REGISTER_COMMANDLINE_MODULE_DYNAMIC</div>
+<div class="line">HPX_COMPONENT_EXPORT is needed to export the symbol names when putting the components or functions into a shared library.</div>
 </div>
 </div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">component_commandline_base.hpp</span></code></p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">HPX_REGISTER_COMMANDLINE_OPTIONS</div>
-<div class="line">HPX_REGISTER_COMMANDLINE_OPTIONS_DYNAMIC</div>
-<div class="line">HPX_REGISTER_COMMANDLINE_REGISTRY</div>
-<div class="line">HPX_REGISTER_COMMANDLINE_REGISTRY_DYNAMIC</div>
+<p><strong>Examples:</strong></p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// In the header file (.hpp)</span>
+</pre></div>
 </div>
-</div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">component_factory.hpp</span></code></p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">HPX_REGISTER_COMPONENT</div>
-<div class="line">HPX_REGISTER_COMPONENT_DYNAMIC</div>
-<div class="line">HPX_REGISTER_DISABLED_COMPONENT_FACTORY</div>
-<div class="line">HPX_REGISTER_DISABLED_COMPONENT_FACTORY_DYNAMIC</div>
-<div class="line">HPX_REGISTER_ENABLED_COMPONENT_FACTORY</div>
-<div class="line">HPX_REGISTER_ENABLED_COMPONENT_FACTORY_DYNAMIC</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_FACTORY</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_FACTORY_</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_FACTORY_1</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_FACTORY_2</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_FACTORY_3</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_FACTORY_DYNAMIC</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_FACTORY_DYNAMIC_</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_FACTORY_DYNAMIC_1</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_FACTORY_DYNAMIC_2</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_FACTORY_DYNAMIC_3</div>
-</div>
-</div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">component_factory_base.hpp</span></code></p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">HPX_REGISTER_COMPONENT_FACTORY</div>
-<div class="line">HPX_REGISTER_COMPONENT_MODULE</div>
-<div class="line">HPX_REGISTER_COMPONENT_MODULE_DYNAMIC</div>
-</div>
-</div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">component_registry.hpp</span></code></p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_REGISTRY</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_REGISTRY_</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_REGISTRY_2</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_REGISTRY_3</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_REGISTRY_DYNAMIC</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_REGISTRY_DYNAMIC_</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_REGISTRY_DYNAMIC_2</div>
-<div class="line">HPX_REGISTER_MINIMAL_COMPONENT_REGISTRY_DYNAMIC_3</div>
-</div>
-</div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">component_registry_base.hpp</span></code></p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">HPX_REGISTER_COMPONENT_REGISTRY</div>
-<div class="line">HPX_REGISTER_COMPONENT_REGISTRY_DYNAMIC</div>
-<div class="line">HPX_REGISTER_REGISTRY_MODULE</div>
-<div class="line">HPX_REGISTER_REGISTRY_MODULE_DYNAMIC</div>
-</div>
-</div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">component_startup_shutdown.hpp</span></code></p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">HPX_DEFINE_COMPONENT_STARTUP_SHUTDOWN</div>
-<div class="line">HPX_REGISTER_SHUTDOWN_MODULE</div>
-<div class="line">HPX_REGISTER_SHUTDOWN_MODULE_DYNAMIC</div>
-<div class="line">HPX_REGISTER_STARTUP_MODULE</div>
-<div class="line">HPX_REGISTER_STARTUP_MODULE_DYNAMIC</div>
-<div class="line">HPX_REGISTER_STARTUP_SHUTDOWN_MODULE</div>
-<div class="line">HPX_REGISTER_STARTUP_SHUTDOWN_MODULE_</div>
-<div class="line">HPX_REGISTER_STARTUP_SHUTDOWN_MODULE_DYNAMIC</div>
-</div>
-</div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">component_startup_shutdown_base.hpp</span></code></p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">HPX_REGISTER_STARTUP_SHUTDOWN_FUNCTIONS</div>
-<div class="line">HPX_REGISTER_STARTUP_SHUTDOWN_FUNCTIONS_DYNAMIC</div>
-<div class="line">HPX_REGISTER_STARTUP_SHUTDOWN_REGISTRY</div>
-<div class="line">HPX_REGISTER_STARTUP_SHUTDOWN_REGISTRY_DYNAMIC</div>
-</div>
-</div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">component_type.hpp</span></code></p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">HPX_DEFINE_COMPONENT_NAME</div>
-<div class="line">HPX_DEFINE_COMPONENT_NAME_</div>
-<div class="line">HPX_DEFINE_COMPONENT_NAME_2</div>
-<div class="line">HPX_DEFINE_COMPONENT_NAME_3</div>
-<div class="line">HPX_DEFINE_GET_COMPONENT_TYPE</div>
-<div class="line">HPX_DEFINE_GET_COMPONENT_TYPE_STATIC</div>
-<div class="line">HPX_DEFINE_GET_COMPONENT_TYPE_TEMPLATE</div>
-</div>
-</div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">derived_component_factory.hpp</span></code></p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">HPX_REGISTER_DERIVED_COMPONENT_FACTORY</div>
-<div class="line">HPX_REGISTER_DERIVED_COMPONENT_FACTORY_</div>
-<div class="line">HPX_REGISTER_DERIVED_COMPONENT_FACTORY_3</div>
-<div class="line">HPX_REGISTER_DERIVED_COMPONENT_FACTORY_4</div>
-<div class="line">HPX_REGISTER_DERIVED_COMPONENT_FACTORY_DYNAMIC</div>
-<div class="line">HPX_REGISTER_DERIVED_COMPONENT_FACTORY_DYNAMIC_</div>
-<div class="line">HPX_REGISTER_DERIVED_COMPONENT_FACTORY_DYNAMIC_3</div>
-<div class="line">HPX_REGISTER_DERIVED_COMPONENT_FACTORY_DYNAMIC_4</div>
-</div>
-</div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">static_factory_data.hpp</span></code></p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">HPX_DECLARE_FACTORY_STATIC</div>
-<div class="line">HPX_DEFINE_FACTORY_STATIC</div>
-<div class="line">HPX_INIT_REGISTRY_COMMANDLINE_STATIC</div>
-<div class="line">HPX_INIT_REGISTRY_FACTORY_STATIC</div>
-<div class="line">HPX_INIT_REGISTRY_MODULE_STATIC</div>
-<div class="line">HPX_INIT_REGISTRY_STARTUP_SHUTDOWN_STATIC</div>
-</div>
-</div></blockquote>
-<p>File: <code class="docutils literal notranslate"><span class="pre">naming/address.hpp</span></code></p>
-<blockquote>
-<div><p>HPX_ADDRESS_VERSION</p>
-</div></blockquote>
 </div>
 </div>
 
@@ -414,11 +527,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019, Yorlik, https://github.com/McKillroy/hpx_snippets
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -429,7 +550,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
