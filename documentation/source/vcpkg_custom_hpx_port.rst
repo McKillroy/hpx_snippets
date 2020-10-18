@@ -4,7 +4,7 @@ How to build a custom vcpkg HPX port for your project
 
 vcpkg ( Git Repo: https://github.com/Microsoft/vcpkg, Docs: https://vcpkg.readthedocs.io ) is an open source  package manager by Microsoft. It provides so called "ports" of open source libraries which allow building them from source using the port definition. There also is a port for hpx which would be installed like ``./vcpkg install hpx:x64-windows`` on Windows as an example.
 
-vcpkg ports can have so called features. e.g. the lua scripting language can be compiled as c++ which would give it exceptions instead of longjumps for error handling.``./vcpkg install lua[cpp]:x64-windows`` uses this feature.
+vcpkg ports can have so called features. e.g. the lua scripting language can be compiled as c++ which would give it exceptions instead of longjumps for error handling. ``./vcpkg install lua[cpp]:x64-windows`` uses this feature.
 
 HPX has many many variables which can be used to modify how it is built:
 
