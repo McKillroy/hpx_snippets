@@ -1,5 +1,5 @@
 Section 1 : About this Document and the associated Git Repository
------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 This is a draft  / work document I am using, while I am trying to get my head around HPX and build an HPX based distributed application. 
 
